@@ -29,9 +29,14 @@
         <img src={getAvatarUrl(user)} alt="" class="avatar" />
         <div class="user-text">
             <span class="username">{getDisplayName(user)}</span>
-            {#if user.is_active_patron}
-                <span class="badge patron">Patron</span>
-            {/if}
+            <div class="badge-row">
+                {#if user.is_active_patron}
+                    <span class="badge patron"><i class="fab fa-patreon"></i> Patron</span>
+                {/if}
+                {#if user.is_master_admin}
+                    <span class="badge admin"><i class="fas fa-shield-alt"></i> Admin</span>
+                {/if}
+            </div>
         </div>
     </div>
     <button class="logout-btn" on:click={logout} title="Logout">
@@ -69,6 +74,11 @@
         min-width: 0;
     }
 
+    .badge-row {
+        display: flex;
+        gap: 4px;
+    }
+
     .username {
         font-weight: 600;
         font-size: 0.85rem;
@@ -78,16 +88,37 @@
     }
 
     .badge {
-        font-size: 0.65rem;
-        font-weight: 600;
-        padding: 1px 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 2px 8px;
         border-radius: 4px;
         width: fit-content;
+        letter-spacing: 0.03em;
     }
 
     .badge.patron {
-        background: var(--accent-blue-light);
-        color: var(--accent-blue-bright);
+        background: linear-gradient(135deg, #f87171, #c084fc, #60a5fa, #34d399, #fbbf24, #f87171);
+        background-size: 300% 300%;
+        animation: shimmer 4s ease infinite;
+        color: #fff;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .badge.admin {
+        background: linear-gradient(135deg, #60a5fa, #3b82f6, #2563eb);
+        color: #fff;
+        text-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+        border: 1px solid rgba(96, 165, 250, 0.3);
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     .logout-btn {

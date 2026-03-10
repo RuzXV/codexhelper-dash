@@ -212,10 +212,9 @@
     }
 
     .nav-item.active {
-        background: var(--nav-item-active);
+        background: rgba(255, 255, 255, 0.04);
         color: var(--accent-blue);
-        border-left: 3px solid var(--accent-blue);
-        padding-left: 9px;
+        font-weight: 600;
     }
 
     .nav-item i:first-child {
@@ -261,9 +260,8 @@
 
     .nav-item.sub.active {
         color: var(--accent-blue);
-        background: var(--nav-item-active);
-        border-left: 3px solid var(--accent-blue);
-        padding-left: 9px;
+        background: rgba(255, 255, 255, 0.04);
+        font-weight: 600;
     }
 
     .nav-item.sub i:first-child {

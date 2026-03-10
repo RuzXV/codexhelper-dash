@@ -5,13 +5,13 @@
 }
 
 :root {
-    /* Core backgrounds — MEE6-inspired dark indigo/slate */
-    --bg-primary: #1e2030;
-    --bg-secondary: #252738;
-    --bg-tertiary: #2c2e42;
-    --bg-card: #222436;
-    --bg-sidebar: #181a2a;
-    --bg-input: #1a1c2e;
+    /* Core backgrounds — dark navy/blue */
+    --bg-primary: #111827;
+    --bg-secondary: #1a2332;
+    --bg-tertiary: #1f2d3d;
+    --bg-card: #172231;
+    --bg-sidebar: #0f1923;
+    --bg-input: #142030;
 
     /* Text */
     --text-primary: rgba(255, 255, 255, 0.92);
@@ -79,16 +79,16 @@
     --radius-xl: 16px;
 
     /* Sidebar */
-    --bg-sidebar: #181a2a;
+    --bg-sidebar: #0f1923;
     --sidebar-width: 260px;
     --sidebar-collapsed-width: 64px;
     --nav-item-hover: rgba(255, 255, 255, 0.05);
-    --nav-item-active: rgba(79, 140, 247, 0.12);
+    --nav-item-active: rgba(59, 130, 246, 0.1);
 
     /* Glass / Overlay */
-    --glass-bg: rgba(37, 39, 56, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --overlay-bg: rgba(10, 10, 20, 0.7);
+    --glass-bg: rgba(17, 24, 39, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --overlay-bg: rgba(5, 10, 20, 0.75);
 
     /* Shadows */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.15);
