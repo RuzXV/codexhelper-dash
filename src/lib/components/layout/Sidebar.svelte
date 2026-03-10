@@ -49,9 +49,7 @@
     <div class="sidebar-top">
         <!-- Brand -->
         <div class="brand">
-            <div class="brand-icon">
-                <i class="fas fa-scroll"></i>
-            </div>
+            <img src="/logo.webp" alt="Codex Helper" class="brand-logo" />
             <span class="brand-text">Codex Helper</span>
         </div>
 
@@ -166,17 +164,12 @@
         padding: 18px 20px 8px;
     }
 
-    .brand-icon {
+    .brand-logo {
         width: 32px;
         height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
         border-radius: var(--radius-md);
-        color: white;
-        font-size: 0.85rem;
         flex-shrink: 0;
+        object-fit: contain;
     }
 
     .brand-text {

@@ -113,9 +113,7 @@
 {:else if !user}
     <div class="auth-screen">
         <div class="auth-card">
-            <div class="auth-icon">
-                <i class="fas fa-scroll"></i>
-            </div>
+            <img src="/logo.webp" alt="Codex Helper" class="auth-logo" />
             <h1>Codex Helper</h1>
             <p>Sign in with Discord to access the dashboard.</p>
             <button class="login-btn" on:click={login}>
@@ -198,17 +196,12 @@
         margin: 0 20px;
     }
 
-    .auth-icon {
-        width: 64px;
-        height: 64px;
+    .auth-logo {
+        width: 72px;
+        height: 72px;
         margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-        border-radius: 16px;
-        font-size: 1.5rem;
-        color: white;
+        display: block;
+        object-fit: contain;
     }
 
     .auth-card h1, .auth-card h2 {
