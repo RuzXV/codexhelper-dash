@@ -98,9 +98,13 @@ async function refreshAuth(): Promise<void> {
         currentUser = user;
         cacheUser(user);
         document.dispatchEvent(new CustomEvent('auth:loggedIn', { detail: { user } }));
-    } catch {
-        currentUser = null;
-        clearUserCache();
-        document.dispatchEvent(new CustomEvent('auth:loggedOut'));
+    } catch (e: any) {
+        // Only clear session on actual auth failure (401), not network errors
+        if (e?.message === 'Session expired') {
+            currentUser = null;
+            clearUserCache();
+            document.dispatchEvent(new CustomEvent('auth:loggedOut'));
+        }
+        // Network errors silently ignored — keep using cached user
     }
 }
