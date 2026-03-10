@@ -67,7 +67,7 @@
 
 <div class="vertical-list">
     {#each items as item}
-        <div class="list-item" style="border-left: 4px solid #004cff;">
+        <div class="list-item" style="border-left: 4px solid var(--accent-blue);">
             <div class="item-left">
                 <div class="avatar-wrapper">
                     {#if item.avatarUrl}
@@ -118,8 +118,8 @@
 
 <style>
     .action-btn.delete:hover {
-        background: #ef4444;
-        border-color: #ef4444;
+        background: var(--accent-red);
+        border-color: var(--accent-red);
         color: white;
     }
 

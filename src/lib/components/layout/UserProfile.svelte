@@ -86,7 +86,7 @@
     }
 
     .badge.patron {
-        background: rgba(59, 130, 246, 0.15);
+        background: var(--accent-blue-light);
         color: var(--accent-blue-bright);
     }
 
@@ -99,7 +99,7 @@
     }
 
     .logout-btn:hover {
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
 </style>

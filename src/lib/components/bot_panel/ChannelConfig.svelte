@@ -207,7 +207,7 @@
     .section-header {
         padding: 20px;
         border-bottom: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
         display: block;
     }
     .section-desc {
@@ -290,7 +290,7 @@
         border-radius: 6px;
         z-index: 50;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow-md);
     }
     .dropdown-search {
         padding: 8px;
@@ -330,16 +330,16 @@
         color: white;
     }
     .dropdown-option.selected {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
         font-weight: 600;
     }
     .dropdown-option.danger {
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .info-note {
         margin-top: 15px;
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         border-left: 3px solid var(--accent-blue);
         padding: 12px 15px;
         border-radius: 4px;

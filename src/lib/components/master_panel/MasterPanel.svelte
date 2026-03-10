@@ -560,13 +560,13 @@
     .status-indicator {
         width: 8px;
         height: 8px;
-        background-color: #4ade80;
+        background-color: var(--accent-green);
         border-radius: 50%;
-        box-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+        box-shadow: 0 0 5px rgba(52, 211, 153, 0.5);
     }
 
     .status-indicator.red {
-        background-color: #ef4444;
+        background-color: var(--accent-red);
         box-shadow: none;
     }
 
@@ -613,7 +613,7 @@
     .source-btn.active {
         background: var(--bg-card);
         color: var(--accent-blue);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-sm);
     }
 
     .entry-count {
@@ -688,7 +688,7 @@
         font-size: 1.2rem;
     }
     .state-msg.error {
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .state-msg i {
         font-size: 2rem;

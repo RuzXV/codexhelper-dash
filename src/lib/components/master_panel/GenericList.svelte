@@ -202,8 +202,8 @@
         border-color: var(--accent-blue);
     }
     .action-btn.delete:hover {
-        background: #ef4444;
-        border-color: #ef4444;
+        background: var(--accent-red);
+        border-color: var(--accent-red);
     }
 
     .no-results {

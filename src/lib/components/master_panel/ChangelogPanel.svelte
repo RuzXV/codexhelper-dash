@@ -328,7 +328,7 @@
     .details-content {
         padding: 20px;
         border-left: 4px solid var(--accent-blue);
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.02);
     }
 
     .diff-header {
@@ -386,12 +386,12 @@
     }
 
     .tag-new {
-        color: #4ade80;
+        color: var(--accent-green);
         font-style: italic;
         opacity: 0.8;
     }
     .tag-deleted {
-        color: #ef4444;
+        color: var(--accent-red);
         font-style: italic;
         opacity: 0.8;
     }
@@ -436,13 +436,13 @@
         opacity: 0.7;
     }
     :global(.diff-red) {
-        color: #ff5555;
-        background: rgba(255, 85, 85, 0.1);
+        color: var(--accent-red);
+        background: var(--accent-red-light);
         font-weight: bold;
     }
     :global(.diff-green) {
-        color: #4ade80;
-        background: rgba(74, 222, 128, 0.1);
+        color: var(--accent-green);
+        background: var(--accent-green-light);
         font-weight: bold;
     }
 </style>

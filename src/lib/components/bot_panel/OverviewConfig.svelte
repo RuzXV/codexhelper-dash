@@ -241,7 +241,7 @@
         <div class="modal-overlay" on:click={() => (showDeauthConfirm = false)} transition:fade={{ duration: 150 }}>
             <div class="modal-card" on:click|stopPropagation>
                 <div class="modal-header">
-                    <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                    <i class="fas fa-exclamation-triangle" style="color: var(--accent-red);"></i>
                     <h3>Deauthorize Server</h3>
                 </div>
                 <div class="modal-body">
@@ -331,18 +331,18 @@
         flex-direction: row;
         align-items: center;
         gap: 10px;
-        border: 1px solid var(--accent-blue, #3b82f6);
+        border: 1px solid var(--accent-blue);
         transition: all 0.2s;
     }
 
     .patron-badge.bypass {
-        border-color: var(--accent-purple, #8b5cf6);
-        background: rgba(139, 92, 246, 0.1);
+        border-color: var(--accent-purple);
+        background: var(--accent-purple-light);
     }
 
     .patron-badge.warning {
-        border-color: #f59e0b;
-        color: #f59e0b;
+        border-color: var(--accent-yellow);
+        color: var(--accent-yellow);
     }
 
     .patron-label {
@@ -368,7 +368,7 @@
     }
 
     .patron-badge.bypass .patron-avatar {
-        border-color: var(--accent-purple, #8b5cf6);
+        border-color: var(--accent-purple);
     }
 
     .patron-name {
@@ -393,7 +393,7 @@
     .card-header {
         padding: 15px 20px;
         border-bottom: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
     }
     .card-header h3 {
         margin: 0;
@@ -430,7 +430,7 @@
         font-size: 1.1rem;
     }
     .status-icon.success {
-        color: #10b981;
+        color: var(--accent-green);
     }
     .status-icon.error {
         color: var(--text-muted);
@@ -446,7 +446,7 @@
     .value {
         font-size: 0.9rem;
         font-family: monospace;
-        background: rgba(0, 0, 0, 0.2);
+        background: var(--bg-tertiary);
         padding: 2px 6px;
         border-radius: 4px;
     }
@@ -485,9 +485,9 @@
         font-size: 0.85rem;
     }
     .btn-deauth:hover {
-        border-color: #ef4444;
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
+        border-color: var(--accent-red);
+        color: var(--accent-red);
+        background: var(--accent-red-light);
     }
 
     .modal-overlay {
@@ -496,7 +496,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: var(--overlay-bg);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -509,7 +509,7 @@
         border-radius: 12px;
         width: 100%;
         max-width: 440px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
     }
     .modal-header {
         display: flex;
@@ -561,7 +561,7 @@
         color: var(--text-primary);
     }
     .btn-modal-confirm {
-        background: #ef4444;
+        background: var(--accent-red);
         border: none;
         color: white;
         padding: 8px 18px;
@@ -571,7 +571,7 @@
         transition: all 0.2s;
     }
     .btn-modal-confirm:hover {
-        background: #dc2626;
+        background: var(--accent-red-hover);
     }
     .btn-modal-confirm:disabled,
     .btn-modal-cancel:disabled {

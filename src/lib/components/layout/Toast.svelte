@@ -36,25 +36,27 @@
         border-radius: var(--radius-lg);
         z-index: 10000;
         max-width: 400px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow-lg);
         font-size: 0.9rem;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
     }
 
     .toast-success {
-        background: rgba(34, 197, 94, 0.15);
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        color: #4ade80;
+        background: rgba(52, 211, 153, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        color: var(--accent-green);
     }
 
     .toast-error {
-        background: rgba(239, 68, 68, 0.15);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        color: #f87171;
+        background: rgba(248, 113, 113, 0.15);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        color: var(--accent-red);
     }
 
     .toast-info {
-        background: rgba(59, 130, 246, 0.15);
-        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: rgba(79, 140, 247, 0.15);
+        border: 1px solid rgba(79, 140, 247, 0.3);
         color: var(--accent-blue-bright);
     }
 

@@ -293,7 +293,7 @@
     }
     .section-header {
         padding: 15px 20px;
-        background: rgba(0, 0, 0, 0.15);
+        background: transparent;
         border-bottom: 1px solid var(--border-color);
     }
     .section-header h3 {
@@ -379,7 +379,7 @@
         background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-md);
         z-index: 100;
         overflow: hidden;
         max-height: 250px;
@@ -402,15 +402,15 @@
         color: var(--text-primary);
     }
     .dropdown-option.selected {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
         font-weight: 500;
     }
     .dropdown-option.danger {
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .dropdown-option.danger:hover {
-        background: rgba(239, 68, 68, 0.1);
+        background: var(--accent-red-light);
     }
     .hash {
         opacity: 0.5;
@@ -428,8 +428,8 @@
     }
     .toggle-wrapper {
         position: relative;
-        width: 50px;
-        height: 26px;
+        width: var(--toggle-width);
+        height: var(--toggle-height);
     }
     .toggle-wrapper input {
         opacity: 0;
@@ -451,8 +451,8 @@
     .toggle-switch:before {
         position: absolute;
         content: '';
-        height: 18px;
-        width: 18px;
+        height: var(--toggle-knob);
+        width: var(--toggle-knob);
         left: 3px;
         bottom: 3px;
         background-color: var(--text-secondary);
@@ -464,7 +464,7 @@
         border-color: var(--accent-blue);
     }
     input:checked + .toggle-switch:before {
-        transform: translateX(24px);
+        transform: translateX(var(--toggle-translate));
         background-color: white;
     }
 
@@ -497,7 +497,7 @@
         border-top: 1px solid var(--border-color);
     }
     .info-note {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         border-left: 3px solid var(--accent-blue);
         padding: 15px;
         border-radius: 4px;

@@ -949,7 +949,7 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
         border: 1px solid var(--border-color);
         position: relative;
     }
@@ -1077,7 +1077,7 @@
         color: white;
     }
     .template-btn.is-main {
-        border-color: #004cff;
+        border-color: var(--accent-blue);
     }
     .template-selector-container .add-build-btn {
         background: var(--accent-green);
@@ -1128,7 +1128,7 @@
         border-radius: 4px;
         max-height: 200px;
         overflow-y: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-md);
         margin-top: 4px;
     }
     .option {
@@ -1199,13 +1199,13 @@
         color: var(--text-primary);
     }
     .btn-icon.danger:hover {
-        color: #ff4444;
+        color: var(--accent-red);
     }
     .spacer {
         height: 10px;
     }
     .btn-danger {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
         border: none;
         padding: 8px 16px;
@@ -1227,7 +1227,7 @@
     }
 
     .btn-save {
-        background: linear-gradient(135deg, var(--accent-green), #10b981);
+        background: var(--accent-green);
         color: white;
         border: none;
         padding: 8px 20px;
@@ -1262,7 +1262,7 @@
         border-radius: 8px;
         width: 400px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
     }
     .modal h3 {
         margin-top: 0;
@@ -1291,7 +1291,7 @@
         transition: color 0.2s;
     }
     .char-count.error {
-        color: #ef4444;
+        color: var(--accent-red);
         font-weight: bold;
     }
 
@@ -1309,8 +1309,8 @@
         margin-top: 10px;
     }
     .total-count-bar.error {
-        border-color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
+        border-color: var(--accent-red);
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
 </style>

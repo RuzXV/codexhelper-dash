@@ -181,17 +181,17 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-sm);
         transition: transform 0.2s;
     }
     .team-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border-color: var(--accent-blue-light, #60a5fa);
+        box-shadow: var(--shadow-md);
+        border-color: var(--accent-blue-bright);
     }
 
     .team-header {
-        background: rgba(0, 0, 0, 0.2);
+        background: transparent;
         padding: 12px 15px;
         border-bottom: 1px solid var(--border-color);
         display: flex;
@@ -242,7 +242,7 @@
         transition: color 0.2s;
     }
     .btn-icon.danger:hover {
-        color: #ef4444;
+        color: var(--accent-red);
     }
 
     .team-body {
@@ -303,7 +303,7 @@
     .role-info {
         font-size: 0.8rem;
         color: var(--text-secondary);
-        background: rgba(59, 130, 246, 0.08);
+        background: var(--accent-blue-light);
         padding: 6px 10px;
         border-radius: 4px;
         display: flex;
@@ -326,7 +326,7 @@
     }
     .list-header {
         padding: 8px 12px;
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
         border-bottom: 1px solid var(--border-color);
         font-size: 0.8rem;
         font-weight: 600;
@@ -343,8 +343,8 @@
         font-size: 0.7rem;
     }
     .count-badge.full {
-        background: rgba(239, 68, 68, 0.2);
-        color: #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
 
     .signup-list {
@@ -385,8 +385,8 @@
         border-radius: 4px;
     }
     .btn-remove:hover {
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
+        color: var(--accent-red);
+        background: var(--accent-red-light);
     }
 
     .add-signup-row {
@@ -413,7 +413,7 @@
         transition: background 0.2s;
     }
     .add-signup-row button:hover {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
     }
     .add-signup-row button:disabled {
         color: var(--text-muted);

@@ -491,7 +491,7 @@
 
     /* Field Items Styling */
     .field-item {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.02);
         padding: 10px;
         border-radius: 6px;
         border: 1px solid var(--border-color);
@@ -532,10 +532,10 @@
         transition: color 0.2s;
     }
     .char-count.warning {
-        color: #eab308;
+        color: var(--accent-yellow);
     }
     .char-count.error {
-        color: #ef4444;
+        color: var(--accent-red);
         font-weight: bold;
     }
 
@@ -547,12 +547,12 @@
         font-size: 0.7rem;
         color: var(--text-secondary);
         pointer-events: none;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.4);
         padding: 2px 4px;
         border-radius: 3px;
     }
     .char-mini.error {
-        color: #ef4444;
+        color: var(--accent-red);
     }
 
     /* Total Count Bar */
@@ -570,9 +570,9 @@
         margin-top: 10px;
     }
     .total-count-bar.error {
-        border-color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
+        border-color: var(--accent-red);
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
 
     /* Discord Preview */
@@ -811,7 +811,7 @@
         cursor: pointer;
     }
     .btn-icon.danger:hover {
-        color: #ef4444;
+        color: var(--accent-red);
     }
 
     .modal-backdrop {
@@ -829,7 +829,7 @@
         border-radius: 8px;
         width: 400px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
     }
     .modal h3 {
         margin-top: 0;
@@ -846,7 +846,7 @@
         gap: 10px;
     }
     .btn-danger {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
         border: none;
         padding: 8px 16px;

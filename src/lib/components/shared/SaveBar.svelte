@@ -30,11 +30,13 @@
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
         padding: 12px 24px;
         border-radius: 50px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--shadow-lg);
         z-index: 1000;
         min-width: 350px;
     }
@@ -51,7 +53,7 @@
     .btn-save {
         background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
         color: white;
-        border: 2px solid #60a5fa;
+        border: 2px solid var(--accent-blue-bright);
         padding: 8px 24px;
         border-radius: 20px;
         font-weight: 600;
@@ -59,8 +61,8 @@
     }
     .btn-discard {
         background: transparent;
-        color: #ef4444;
-        border: 2px solid #ef4444;
+        color: var(--accent-red);
+        border: 2px solid var(--accent-red);
         padding: 8px 16px;
         border-radius: 20px;
         font-weight: 600;

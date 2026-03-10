@@ -214,6 +214,8 @@
     .nav-item.active {
         background: var(--nav-item-active);
         color: var(--accent-blue);
+        border-left: 3px solid var(--accent-blue);
+        padding-left: 9px;
     }
 
     .nav-item i:first-child {
@@ -260,6 +262,8 @@
     .nav-item.sub.active {
         color: var(--accent-blue);
         background: var(--nav-item-active);
+        border-left: 3px solid var(--accent-blue);
+        padding-left: 9px;
     }
 
     .nav-item.sub i:first-child {

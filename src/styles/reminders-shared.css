@@ -13,7 +13,7 @@
 }
 .section-header {
     padding: clamp(10px, 2vw, 15px) clamp(12px, 3vw, 20px);
-    background: rgba(0, 0, 0, 0.15);
+    background: transparent;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
@@ -35,8 +35,8 @@
 /* Toggle switch */
 .toggle-wrapper {
     position: relative;
-    width: 44px;
-    height: 24px;
+    width: var(--toggle-width);
+    height: var(--toggle-height);
 }
 .toggle-wrapper input {
     opacity: 0;
@@ -58,8 +58,8 @@
 .toggle-switch:before {
     position: absolute;
     content: '';
-    height: 16px;
-    width: 16px;
+    height: var(--toggle-knob);
+    width: var(--toggle-knob);
     left: 3px;
     bottom: 3px;
     background-color: var(--text-secondary);
@@ -71,7 +71,7 @@ input:checked + .toggle-switch {
     border-color: var(--accent-blue);
 }
 input:checked + .toggle-switch:before {
-    transform: translateX(20px);
+    transform: translateX(var(--toggle-translate));
     background-color: white;
 }
 .toggle-wrapper.small {
@@ -112,7 +112,7 @@ input:checked + .toggle-switch:before {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
     z-index: 100;
     max-height: 200px;
     overflow-y: auto;
@@ -175,8 +175,8 @@ input:checked + .toggle-switch:before {
 
 /* Warning banner */
 .warning-banner {
-    background: rgba(245, 158, 11, 0.1);
-    border-left: 3px solid #f59e0b;
+    background: var(--accent-yellow-light);
+    border-left: 3px solid var(--accent-yellow);
     padding: clamp(8px, 2vw, 10px) clamp(10px, 2vw, 15px);
     margin: clamp(10px, 2vw, 15px) clamp(12px, 3vw, 20px) 0;
     border-radius: 4px;
@@ -184,7 +184,7 @@ input:checked + .toggle-switch:before {
     gap: clamp(6px, 1.5vw, 10px);
     align-items: start;
     font-size: 0.85rem;
-    color: #fbbf24;
+    color: var(--accent-yellow);
 }
 
 /* Settings body */
@@ -319,7 +319,7 @@ input:checked + .toggle-switch:before {
     transition: color 0.2s;
 }
 .btn-delete:hover {
-    color: #ef4444;
+    color: var(--accent-red);
 }
 .custom-card-body {
     padding: clamp(10px, 2vw, 15px);
@@ -408,7 +408,7 @@ input:checked + .toggle-switch:before {
 }
 .setup-form-header {
     padding: 12px 20px;
-    background: rgba(59, 130, 246, 0.08);
+    background: var(--accent-blue-light);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -476,7 +476,7 @@ input:checked + .toggle-switch:before {
     align-items: flex-start;
     gap: 8px;
     padding: 10px 12px;
-    background: rgba(59, 130, 246, 0.06);
+    background: var(--accent-blue-light);
     border-radius: 6px;
     font-size: 0.8rem;
     color: var(--text-secondary);

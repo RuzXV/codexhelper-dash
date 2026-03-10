@@ -182,7 +182,7 @@
 
 <style>
     .pairing-group {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.02);
         border: 1px solid var(--border-color);
         border-radius: 6px;
         padding: 10px;
@@ -279,7 +279,7 @@
         color: var(--text-primary);
     }
     .btn-icon.danger:hover {
-        color: #ff4444;
+        color: var(--accent-red);
     }
     .char-count {
         font-size: 0.7rem;
@@ -287,10 +287,10 @@
         transition: color 0.2s;
     }
     .char-count.warning {
-        color: #eab308;
+        color: var(--accent-yellow);
     }
     .char-count.error {
-        color: #ef4444;
+        color: var(--accent-red);
         font-weight: bold;
     }
     .char-mini {
@@ -299,7 +299,7 @@
         pointer-events: none;
     }
     .char-mini.error {
-        color: #ef4444;
+        color: var(--accent-red);
         font-weight: bold;
     }
     .group-footer-info {

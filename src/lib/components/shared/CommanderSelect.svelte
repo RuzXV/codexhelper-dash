@@ -155,7 +155,7 @@
         border-radius: 4px;
         max-height: 200px;
         overflow-y: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-md);
         margin-top: 4px;
     }
     .option {

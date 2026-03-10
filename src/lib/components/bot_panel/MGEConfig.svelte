@@ -315,21 +315,21 @@
         border: 1px solid var(--border-color);
     }
     .mge-status-banner.active {
-        background: rgba(16, 185, 129, 0.08);
-        border-color: rgba(16, 185, 129, 0.3);
+        background: var(--accent-green-light);
+        border-color: rgba(52, 211, 153, 0.3);
     }
     .mge-status-banner.inactive {
-        background: rgba(245, 158, 11, 0.06);
-        border-color: rgba(245, 158, 11, 0.2);
+        background: var(--accent-yellow-light);
+        border-color: rgba(251, 191, 36, 0.2);
     }
     .status-icon {
         font-size: 1.4rem;
     }
     .mge-status-banner.active .status-icon {
-        color: #10b981;
+        color: var(--accent-green);
     }
     .mge-status-banner.inactive .status-icon {
-        color: #f59e0b;
+        color: var(--accent-yellow);
     }
     .status-info,
     .status-extra {
@@ -369,7 +369,7 @@
     .section-header {
         padding: 20px;
         border-bottom: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
     }
     .section-header h3 {
         margin: 0;
@@ -466,7 +466,7 @@
         border-radius: 6px;
         z-index: 50;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow-md);
     }
     .dropdown-search {
         padding: 8px;
@@ -504,12 +504,12 @@
         color: white;
     }
     .dropdown-option.selected {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
         font-weight: 600;
     }
     .dropdown-option.danger {
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .role-dot {
         width: 10px;

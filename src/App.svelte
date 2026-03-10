@@ -105,6 +105,7 @@
 </script>
 
 <Toast />
+<div class="page-bg"></div>
 
 {#if loading}
     <div class="loading-screen">
@@ -170,6 +171,34 @@
 {/if}
 
 <style>
+    /* Background */
+    .page-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+        background-image: url('/tool_bg1.webp');
+        background-color: var(--bg-primary);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .page-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(30, 32, 48, 0.92) 0%,
+            rgba(30, 32, 48, 0.88) 30%,
+            rgba(30, 32, 48, 0.95) 100%
+        );
+    }
+
     /* Loading & Auth screens */
     .loading-screen,
     .auth-screen {
@@ -177,7 +206,7 @@
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        background: var(--bg-primary);
+        background: transparent;
     }
 
     .loading-icon {
@@ -188,12 +217,15 @@
     .auth-card {
         text-align: center;
         padding: 48px 40px;
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
         border-radius: var(--radius-xl);
         max-width: 420px;
         width: 100%;
         margin: 0 20px;
+        box-shadow: var(--shadow-lg);
     }
 
     .auth-logo {
@@ -232,7 +264,7 @@
         align-items: center;
         gap: 10px;
         padding: 12px 28px;
-        background: #5865F2;
+        background: var(--accent-discord);
         color: white;
         border-radius: var(--radius-lg);
         font-weight: 600;
@@ -241,7 +273,7 @@
     }
 
     .login-btn:hover {
-        background: #4752c4;
+        background: var(--accent-discord-hover);
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(88, 101, 242, 0.4);
     }

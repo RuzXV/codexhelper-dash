@@ -202,13 +202,13 @@
         gap: 12px;
     }
     .locked-badge {
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
         padding: 6px 12px;
         border-radius: 20px;
         font-weight: 600;
         font-size: 0.85rem;
-        border: 1px solid rgba(239, 68, 68, 0.2);
+        border: 1px solid rgba(248, 113, 113, 0.2);
     }
     .access-denied {
         flex: 1;
@@ -222,7 +222,7 @@
     .access-denied i {
         font-size: 4rem;
         margin-bottom: 20px;
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .access-denied h2 {
         margin: 0 0 10px 0;
@@ -296,7 +296,7 @@
         color: var(--text-secondary);
     }
     .tag-rescue {
-        background: #eab308;
+        background: var(--accent-yellow);
         color: black;
         font-size: 0.7rem;
         padding: 2px 6px;
@@ -305,9 +305,9 @@
         margin-left: 8px;
     }
     .restore-btn {
-        background: rgba(239, 68, 68, 0.1);
-        color: #ef4444;
-        border: 1px solid #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
+        border: 1px solid var(--accent-red);
         padding: 6px 16px;
         border-radius: 6px;
         cursor: pointer;
@@ -318,7 +318,7 @@
         gap: 8px;
     }
     .restore-btn:hover {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
     }
     .restore-btn:disabled {

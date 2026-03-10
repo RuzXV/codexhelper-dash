@@ -210,12 +210,12 @@
     }
 
     .tab-btn.add-btn {
-        color: var(--accent-green, #10b981);
+        color: var(--accent-green);
         opacity: 0.8;
     }
     .tab-btn.add-btn:hover {
         opacity: 1;
-        background: rgba(16, 185, 129, 0.1);
+        background: var(--accent-green-light);
     }
 
     .create-panel {

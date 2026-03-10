@@ -137,14 +137,14 @@
         background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow-lg);
         z-index: 100;
         overflow: hidden;
     }
     .dropdown-search {
         width: 100%;
         padding: 8px 12px;
-        background: var(--bg-tertiary);
+        background: var(--bg-input);
         border: none;
         border-bottom: 1px solid var(--border-color);
         color: var(--text-primary);
@@ -163,7 +163,7 @@
         padding: 8px 12px;
         background: transparent;
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid var(--glass-border);
         color: var(--text-secondary);
         cursor: pointer;
         text-align: left;
@@ -176,7 +176,7 @@
     }
     .dropdown-option.selected {
         color: var(--accent-blue);
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
     }
     .dropdown-option:last-child {
         border-bottom: none;

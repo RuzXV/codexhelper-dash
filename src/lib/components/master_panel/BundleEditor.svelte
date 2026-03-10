@@ -543,7 +543,7 @@
         color: var(--text-secondary);
     }
     .char-count.error {
-        color: #ef4444;
+        color: var(--accent-red);
         font-weight: bold;
     }
 
@@ -561,8 +561,8 @@
         margin-top: 10px;
     }
     .total-count-bar.error {
-        border-color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
+        border-color: var(--accent-red);
+        background: var(--accent-red-light);
     }
     .count-row {
         display: flex;
@@ -570,7 +570,7 @@
         width: 100%;
     }
     .count-row span.error {
-        color: #ef4444;
+        color: var(--accent-red);
     }
 
     .discord-preview {
@@ -781,7 +781,7 @@
         cursor: pointer;
     }
     .btn-icon:hover {
-        color: #ef4444;
+        color: var(--accent-red);
     }
 
     .modal-backdrop {
@@ -799,7 +799,7 @@
         border-radius: 8px;
         width: 400px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
     }
     .modal h3 {
         margin-top: 0;
@@ -816,7 +816,7 @@
         gap: 10px;
     }
     .btn-danger {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
         border: none;
         padding: 8px 16px;

@@ -489,22 +489,22 @@
     .filter-chip.active {
         border-color: var(--accent-blue);
         color: var(--accent-blue);
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
     }
     .filter-chip.active.pending {
-        border-color: #f59e0b;
-        color: #f59e0b;
-        background: rgba(245, 158, 11, 0.1);
+        border-color: var(--accent-yellow);
+        color: var(--accent-yellow);
+        background: var(--accent-yellow-light);
     }
     .filter-chip.active.accepted {
-        border-color: #10b981;
-        color: #10b981;
-        background: rgba(16, 185, 129, 0.1);
+        border-color: var(--accent-green);
+        color: var(--accent-green);
+        background: var(--accent-green-light);
     }
     .filter-chip.active.rejected {
-        border-color: #ef4444;
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.1);
+        border-color: var(--accent-red);
+        color: var(--accent-red);
+        background: var(--accent-red-light);
     }
     .chip-count {
         background: rgba(255, 255, 255, 0.1);
@@ -522,7 +522,7 @@
     .card-header {
         padding: 12px 16px;
         border-bottom: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
     }
     .card-header h4 {
         margin: 0;
@@ -577,12 +577,12 @@
         text-transform: uppercase;
     }
     .badge.published {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
+        background: var(--accent-green-light);
+        color: var(--accent-green);
     }
     .badge.draft {
-        background: rgba(245, 158, 11, 0.15);
-        color: #f59e0b;
+        background: var(--accent-yellow-light);
+        color: var(--accent-yellow);
     }
 
     .apps-list {
@@ -656,16 +656,16 @@
         letter-spacing: 0.5px;
     }
     .status-badge.pending {
-        background: rgba(245, 158, 11, 0.15);
-        color: #f59e0b;
+        background: var(--accent-yellow-light);
+        color: var(--accent-yellow);
     }
     .status-badge.accepted {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
+        background: var(--accent-green-light);
+        color: var(--accent-green);
     }
     .status-badge.rejected {
-        background: rgba(239, 68, 68, 0.15);
-        color: #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
     .app-time {
         color: var(--text-muted);
@@ -806,23 +806,23 @@
         transition: all 0.15s;
     }
     .btn-sm.accept {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
+        background: var(--accent-green-light);
+        color: var(--accent-green);
     }
     .btn-sm.accept:hover {
-        background: #10b981;
+        background: var(--accent-green);
         color: white;
     }
     .btn-sm.reject {
-        background: rgba(239, 68, 68, 0.15);
-        color: #ef4444;
+        background: var(--accent-red-light);
+        color: var(--accent-red);
     }
     .btn-sm.reject:hover {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
     }
     .btn-sm.restore {
-        background: rgba(59, 130, 246, 0.15);
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
     }
     .btn-sm.restore:hover {

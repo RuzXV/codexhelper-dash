@@ -46,7 +46,7 @@
     .modal-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: var(--overlay-bg);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,10 +67,10 @@
         margin-bottom: 12px;
     }
     .modal-icon.danger {
-        color: #ef4444;
+        color: var(--accent-red);
     }
     .modal-icon.warning {
-        color: #f59e0b;
+        color: var(--accent-yellow);
     }
     .modal-title {
         font-size: 1.1rem;
@@ -112,17 +112,17 @@
         transition: all 0.2s;
     }
     .btn-confirm.danger {
-        background: #ef4444;
+        background: var(--accent-red);
         color: white;
     }
     .btn-confirm.danger:hover {
-        background: #dc2626;
+        background: var(--accent-red-hover);
     }
     .btn-confirm.warning {
-        background: #f59e0b;
+        background: var(--accent-yellow);
         color: white;
     }
     .btn-confirm.warning:hover {
-        background: #d97706;
+        background: var(--accent-yellow);
     }
 </style>

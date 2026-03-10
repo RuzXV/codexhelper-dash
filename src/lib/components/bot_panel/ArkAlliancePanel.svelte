@@ -472,8 +472,8 @@
         letter-spacing: 0.5px;
     }
     .status-badge.active {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
+        background: var(--accent-green-light);
+        color: var(--accent-green);
     }
 
     .header-actions {
@@ -499,9 +499,9 @@
     }
 
     .btn-action.primary {
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
-        border-color: rgba(59, 130, 246, 0.3);
+        border-color: rgba(79, 140, 247, 0.3);
     }
     .btn-action.primary:hover {
         background: var(--accent-blue);
@@ -509,12 +509,12 @@
     }
 
     .btn-action.success {
-        background: rgba(16, 185, 129, 0.1);
-        color: #10b981;
-        border-color: rgba(16, 185, 129, 0.3);
+        background: var(--accent-green-light);
+        color: var(--accent-green);
+        border-color: rgba(52, 211, 153, 0.3);
     }
     .btn-action.success:hover {
-        background: #10b981;
+        background: var(--accent-green);
         color: white;
     }
 
@@ -528,12 +528,12 @@
     }
 
     .btn-action.danger {
-        color: #ef4444;
-        border-color: rgba(239, 68, 68, 0.3);
+        color: var(--accent-red);
+        border-color: rgba(248, 113, 113, 0.3);
     }
     .btn-action.danger:hover {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: #ef4444;
+        background: var(--accent-red-light);
+        border-color: var(--accent-red);
     }
 
     .panel-content-split {
@@ -573,7 +573,7 @@
     .card-header {
         padding: 15px 20px;
         border-bottom: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
         border-radius: 8px 8px 0 0;
     }
     .card-header h3 {
@@ -656,11 +656,11 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: var(--bg-card, #1f2937);
+        background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-radius: 6px;
         z-index: 100;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-lg);
         margin-top: 4px;
     }
     .dropdown-search {
@@ -695,7 +695,7 @@
         color: var(--text-primary);
     }
     .dropdown-option.danger {
-        color: #ef4444;
+        color: var(--accent-red);
         border-bottom: 1px solid var(--border-color);
     }
 
@@ -724,7 +724,7 @@
     .add-team-card:hover {
         border-color: var(--accent-blue);
         color: var(--accent-blue);
-        background: rgba(59, 130, 246, 0.05);
+        background: var(--accent-blue-light);
     }
 
     .add-icon-circle {
@@ -741,7 +741,7 @@
 
     .add-team-card:hover .add-icon-circle {
         transform: scale(1.1);
-        background: rgba(59, 130, 246, 0.2);
+        background: var(--accent-blue-light);
     }
 
 </style>
