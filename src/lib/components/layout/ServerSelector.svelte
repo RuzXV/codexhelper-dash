@@ -90,6 +90,7 @@
                         class="dropdown-item"
                         class:active={selectedServer?.id === server.id}
                         on:click={() => selectServer(server)}
+                        title="{server.name}{server.approximate_member_count ? ` • ${server.approximate_member_count.toLocaleString()} members` : ''}{server.approximate_presence_count ? ` • ${server.approximate_presence_count.toLocaleString()} online` : ''}"
                     >
                         <div class="server-avatar small">
                             {#if getServerIcon(server)}
@@ -98,7 +99,7 @@
                                 <span class="initials">{getServerInitials(server.name)}</span>
                             {/if}
                         </div>
-                        <span>{server.name}</span>
+                        <span class="item-name">{server.name}</span>
                     </button>
                 {/each}
                 {#if filteredServers.length === 0}
@@ -247,6 +248,14 @@
         font-size: 0.85rem;
         color: var(--text-secondary);
         transition: all 0.15s;
+        min-width: 0;
+    }
+
+    .item-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
     }
 
     .dropdown-item:hover {

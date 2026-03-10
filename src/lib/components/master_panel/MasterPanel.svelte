@@ -169,11 +169,34 @@
         const diffs = {};
         const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+        // For objects with embed-style 'fields' arrays, compare by field name
+        function drillFields(prefix, oldFields, newFields) {
+            const oldMap = new Map((oldFields || []).map((f) => [f.name, f.value]));
+            const newMap = new Map((newFields || []).map((f) => [f.name, f.value]));
+            const allNames = new Set([...oldMap.keys(), ...newMap.keys()]);
+            for (const name of allNames) {
+                const clean = name.replace(/`/g, '');
+                const label = prefix ? `${prefix} › ${clean}` : clean;
+                const o = oldMap.get(name);
+                const n = newMap.get(name);
+                if (!o) diffs[label] = { old: undefined, new: n, status: 'added' };
+                else if (!n) diffs[label] = { old: o, new: undefined, status: 'deleted' };
+                else if (!isEqual(o, n)) diffs[label] = { old: o, new: n, status: 'modified' };
+            }
+        }
+
         for (const key in newObj) {
             if (!oldObj || !oldObj.hasOwnProperty(key)) {
                 diffs[key] = { old: undefined, new: newObj[key], status: 'added' };
             } else if (!isEqual(oldObj[key], newObj[key])) {
-                diffs[key] = { old: oldObj[key], new: newObj[key], status: 'modified' };
+                // Drill into fields arrays for better granularity
+                if (key === 'fields' && Array.isArray(oldObj[key]) && Array.isArray(newObj[key])) {
+                    drillFields('', oldObj[key], newObj[key]);
+                } else if (key === 'description' && Array.isArray(oldObj[key]) && Array.isArray(newObj[key])) {
+                    diffs[key] = { old: oldObj[key], new: newObj[key], status: 'modified' };
+                } else {
+                    diffs[key] = { old: oldObj[key], new: newObj[key], status: 'modified' };
+                }
             }
         }
 
@@ -199,14 +222,64 @@
             const oldItem = oldMap.get(key);
             const newItem = newMap.get(key);
 
-            const label = `Template: ${key}`;
-
             if (!oldItem) {
-                diffs[label] = { old: undefined, new: newItem, status: 'added' };
+                diffs[`${key} (added)`] = { old: undefined, new: newItem, status: 'added' };
             } else if (!newItem) {
-                diffs[label] = { old: oldItem, new: undefined, status: 'deleted' };
+                diffs[`${key} (removed)`] = { old: oldItem, new: undefined, status: 'deleted' };
             } else if (!isEqual(oldItem, newItem)) {
-                diffs[label] = { old: oldItem, new: newItem, status: 'modified' };
+                // Drill into template to find specific field-level changes
+                const oldEmbed = oldItem.json?.embeds?.[0] || {};
+                const newEmbed = newItem.json?.embeds?.[0] || {};
+                let foundSpecific = false;
+
+                // Compare title
+                if (oldEmbed.title !== newEmbed.title) {
+                    diffs[`${key} › Title`] = { old: oldEmbed.title, new: newEmbed.title, status: 'modified' };
+                    foundSpecific = true;
+                }
+
+                // Compare image
+                if (oldEmbed.image?.url !== newEmbed.image?.url) {
+                    diffs[`${key} › Image`] = { old: oldEmbed.image?.url, new: newEmbed.image?.url, status: 'modified' };
+                    foundSpecific = true;
+                }
+
+                // Compare embed fields by name (pairings, accessories, formations, etc.)
+                const oldFields = oldEmbed.fields || [];
+                const newFields = newEmbed.fields || [];
+                const oldFieldMap = new Map(oldFields.map((f) => [f.name, f.value]));
+                const newFieldMap = new Map(newFields.map((f) => [f.name, f.value]));
+                const allFieldNames = new Set([...oldFieldMap.keys(), ...newFieldMap.keys()]);
+
+                for (const fieldName of allFieldNames) {
+                    const oldVal = oldFieldMap.get(fieldName);
+                    const newVal = newFieldMap.get(fieldName);
+                    const cleanName = fieldName.replace(/`/g, '');
+
+                    if (!oldVal) {
+                        diffs[`${key} › ${cleanName}`] = { old: undefined, new: newVal, status: 'added' };
+                        foundSpecific = true;
+                    } else if (!newVal) {
+                        diffs[`${key} › ${cleanName}`] = { old: oldVal, new: undefined, status: 'deleted' };
+                        foundSpecific = true;
+                    } else if (!isEqual(oldVal, newVal)) {
+                        diffs[`${key} › ${cleanName}`] = { old: oldVal, new: newVal, status: 'modified' };
+                        foundSpecific = true;
+                    }
+                }
+
+                // Compare components (buttons)
+                if (!isEqual(oldItem.json?.components, newItem.json?.components)) {
+                    const oldBtns = (oldItem.json?.components?.[0]?.components || []).map((b) => b.label).join(', ');
+                    const newBtns = (newItem.json?.components?.[0]?.components || []).map((b) => b.label).join(', ');
+                    diffs[`${key} › Buttons`] = { old: oldBtns || 'None', new: newBtns || 'None', status: 'modified' };
+                    foundSpecific = true;
+                }
+
+                // Fallback: if nothing specific was detected, show whole template
+                if (!foundSpecific) {
+                    diffs[`${key}`] = { old: oldItem, new: newItem, status: 'modified' };
+                }
             }
         }
         return diffs;
@@ -252,9 +325,16 @@
         }
 
         try {
+            let targetName = saveId;
+            if (Array.isArray(data) && data.length > 0) {
+                targetName = data[0]?.json?.embeds?.[0]?.title || saveId;
+            } else if (data && typeof data === 'object') {
+                targetName = data.title || data.displayName || data.name || saveId;
+            }
+
             const logPayload = {
                 target_key: saveId,
-                target_name: data.title || data.displayName || data.name || saveId,
+                target_name: targetName,
                 changes: changes,
             };
 
@@ -496,7 +576,7 @@
     .dashboard-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
         padding-bottom: 15px;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 20px;

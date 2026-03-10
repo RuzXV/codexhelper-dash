@@ -100,7 +100,7 @@
     }
 
     .badge.patron {
-        background: linear-gradient(135deg, #f87171, #c084fc, #60a5fa, #34d399, #fbbf24, #f87171);
+        background: linear-gradient(135deg, #f472b6, #c084fc, #818cf8, #60a5fa, #f472b6);
         background-size: 300% 300%;
         animation: shimmer 4s ease infinite;
         color: #fff;
