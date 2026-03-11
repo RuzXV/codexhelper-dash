@@ -470,8 +470,10 @@
         flex-wrap: wrap;
     }
     .btn-action {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--card-border);
+        background: rgba(30, 35, 50, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: var(--text-secondary);
         padding: 9px 16px;
         border-radius: 8px;
@@ -484,29 +486,30 @@
         transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
     }
     .btn-action:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(40, 46, 65, 0.85);
         color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.12);
         transform: translateY(-1px);
     }
 
     .btn-action.primary {
-        background: var(--accent-blue-light);
+        background: rgba(79, 140, 247, 0.15);
         color: var(--accent-blue);
-        border-color: rgba(79, 140, 247, 0.25);
+        border-color: rgba(79, 140, 247, 0.3);
     }
     .btn-action.primary:hover {
-        background: var(--accent-blue);
+        background: rgba(79, 140, 247, 0.9);
         color: white;
         box-shadow: 0 4px 12px rgba(79, 140, 247, 0.25);
     }
 
     .btn-action.success {
-        background: var(--accent-green-light);
+        background: rgba(52, 211, 153, 0.12);
         color: var(--accent-green);
-        border-color: rgba(52, 211, 153, 0.25);
+        border-color: rgba(52, 211, 153, 0.3);
     }
     .btn-action.success:hover {
-        background: var(--accent-green);
+        background: rgba(52, 211, 153, 0.85);
         color: white;
         box-shadow: 0 4px 12px rgba(52, 211, 153, 0.25);
     }
@@ -516,17 +519,18 @@
         cursor: not-allowed;
     }
     .btn-action:disabled:hover {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(30, 35, 50, 0.7);
         color: var(--text-secondary);
         transform: none;
     }
 
     .btn-action.danger {
+        background: rgba(248, 113, 113, 0.1);
         color: var(--accent-red);
-        border-color: rgba(248, 113, 113, 0.25);
+        border-color: rgba(248, 113, 113, 0.3);
     }
     .btn-action.danger:hover {
-        background: var(--accent-red-light);
+        background: rgba(248, 113, 113, 0.2);
         border-color: var(--accent-red);
     }
 
