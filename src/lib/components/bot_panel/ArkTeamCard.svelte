@@ -175,8 +175,6 @@
 <style>
     .team-card {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         border-radius: 12px;
         overflow: hidden;
@@ -184,10 +182,9 @@
         flex-direction: column;
         height: 100%;
         box-shadow: var(--card-shadow), var(--card-highlight);
-        transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+        transition: box-shadow var(--transition-base), border-color var(--transition-base);
     }
     .team-card:hover {
-        transform: translateY(-3px);
         box-shadow: var(--card-shadow-hover), var(--card-highlight);
         border-color: var(--card-border-hover);
     }

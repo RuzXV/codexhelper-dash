@@ -74,25 +74,22 @@
 </script>
 
 <div class="ark-container" transition:fade={{ duration: 200 }}>
-    <div class="section-header">
-        {#if loading}
-            <div class="header-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
-        {:else}
-            <div class="tabs-container">
+    {#if loading}
+        <div class="header-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+    {:else}
+        <div class="alliance-bar">
+            <div class="alliance-selector">
                 {#each Object.keys(alliances) as tag}
-                    <button class="tab-btn" class:active={activeTab === tag} on:click={() => (activeTab = tag)}>
+                    <button class="alliance-chip" class:active={activeTab === tag} on:click={() => (activeTab = tag)}>
                         {tag}
                     </button>
                 {/each}
-
-                <button class="tab-btn add-btn" on:click={() => (showCreateModal = true)}>
-                    <i class="fas fa-plus"></i> <span>New Alliance</span>
-                </button>
             </div>
-        {/if}
-    </div>
+            <button class="btn-new-alliance" on:click={() => (showCreateModal = true)}>
+                <i class="fas fa-plus"></i> New Alliance
+            </button>
+        </div>
 
-    {#if !loading}
         {#if showCreateModal}
             <div class="create-panel" transition:slide>
                 <h4>Setup New Alliance</h4>
@@ -106,27 +103,25 @@
             </div>
         {/if}
 
-        <div class="tab-content">
-            {#if activeTab && alliances[activeTab]}
-                {#key activeTab}
-                    <ArkAlliancePanel
-                        {guildId}
-                        allianceTag={activeTab}
-                        data={alliances[activeTab]}
-                        {channels}
-                        {roles}
-                        on:deleted={handleAllianceDeleted}
-                        on:updated={refreshData}
-                    />
-                {/key}
-            {:else if Object.keys(alliances).length === 0 && !showCreateModal}
-                <div class="empty-state">
-                    <i class="fas fa-scroll"></i>
-                    <h4>No Active Setups</h4>
-                    <p>Click <strong>+ New Alliance</strong> above to get started.</p>
-                </div>
-            {/if}
-        </div>
+        {#if activeTab && alliances[activeTab]}
+            {#key activeTab}
+                <ArkAlliancePanel
+                    {guildId}
+                    allianceTag={activeTab}
+                    data={alliances[activeTab]}
+                    {channels}
+                    {roles}
+                    on:deleted={handleAllianceDeleted}
+                    on:updated={refreshData}
+                />
+            {/key}
+        {:else if Object.keys(alliances).length === 0 && !showCreateModal}
+            <div class="empty-state">
+                <i class="fas fa-scroll"></i>
+                <h4>No Active Setups</h4>
+                <p>Click <strong>+ New Alliance</strong> above to get started.</p>
+            </div>
+        {/if}
     {/if}
 </div>
 
@@ -134,16 +129,8 @@
     .ark-container {
         display: flex;
         flex-direction: column;
-        gap: 0;
+        gap: 20px;
         animation: cardSlideUp var(--transition-smooth) both;
-    }
-
-    .section-header {
-        display: flex;
-        align-items: center;
-        padding-bottom: 0;
-        border-bottom: 1px solid var(--card-border);
-        min-height: 48px;
     }
 
     .header-loading {
@@ -152,85 +139,62 @@
         font-style: italic;
     }
 
-    .tabs-container {
-        display: flex;
-        gap: 2px;
-        overflow-x: auto;
-        width: 100%;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        padding-top: 1px;
-        align-self: flex-end;
-    }
-
-    .tab-btn {
-        position: relative;
-        background: transparent;
-        border: 1px solid transparent;
-        border-bottom: none;
-        padding: 14px 24px;
-        color: var(--text-secondary);
-        cursor: pointer;
-        font-weight: 600;
-        border-radius: 10px 10px 0 0;
-        transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
-        font-size: 1.05rem;
-        white-space: nowrap;
+    .alliance-bar {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        flex-shrink: 0;
-        min-width: 33%;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
     }
-
-    .tab-btn.add-btn {
-        min-width: auto;
-        width: auto;
+    .alliance-selector {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
     }
-
-    .tab-btn:hover {
+    .alliance-chip {
         background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--card-border);
+        color: var(--text-secondary);
+        padding: 8px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+    }
+    .alliance-chip:hover {
         color: var(--text-primary);
+        border-color: var(--card-border-hover);
     }
-
-    .tab-btn.active {
-        background: var(--card-bg);
+    .alliance-chip.active {
+        background: var(--accent-blue-light);
         color: var(--accent-blue);
-        border: 1px solid var(--card-border);
-        border-bottom: 1px solid transparent;
-        margin-bottom: -1px;
-        z-index: 10;
-        backdrop-filter: blur(12px);
+        border-color: rgba(79, 140, 247, 0.3);
     }
-    .tab-content {
-        background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--card-border);
-        border-top: none;
-        border-radius: 0 0 12px 12px;
-        padding: 24px;
-        box-shadow: var(--card-shadow);
-    }
-
-    .tab-btn.add-btn {
+    .btn-new-alliance {
+        background: transparent;
+        border: 1px dashed rgba(52, 211, 153, 0.3);
         color: var(--accent-green);
-        opacity: 0.8;
+        padding: 8px 18px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background var(--transition-base), border-color var(--transition-base);
     }
-    .tab-btn.add-btn:hover {
-        opacity: 1;
+    .btn-new-alliance:hover {
         background: var(--accent-green-light);
+        border-color: var(--accent-green);
     }
 
     .create-panel {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         padding: 24px;
         border-radius: 12px;
-        margin-bottom: 20px;
         box-shadow: var(--card-shadow), var(--card-highlight);
     }
     .create-panel h4 {

@@ -236,8 +236,6 @@
         justify-content: space-between;
         align-items: center;
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         padding: 24px;
         border-radius: 12px;
         border: 1px solid var(--card-border);
@@ -395,8 +393,6 @@
 
     .channels-section {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         border-radius: 12px;
         padding: 24px;

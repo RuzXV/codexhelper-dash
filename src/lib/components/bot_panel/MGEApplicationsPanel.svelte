@@ -451,8 +451,6 @@
     }
     .btn-refresh {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         color: var(--text-secondary);
         padding: 8px 14px;
@@ -518,8 +516,6 @@
 
     .rankings-card {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         border-radius: 12px;
         overflow: hidden;
@@ -602,8 +598,6 @@
     }
     .app-card {
         background: var(--card-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--card-border);
         border-radius: 12px;
         overflow: hidden;
