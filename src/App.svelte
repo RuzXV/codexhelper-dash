@@ -26,6 +26,44 @@
     let allowedViews = [];
     let servers = [];
 
+    const VALID_BOT_TABS = ['overview', 'channels', 'calendar', 'reminders', 'mge', 'ark'];
+    const VALID_VIEWS = ['config', 'master', 'changelog', 'recovery'];
+
+    /** Build a URL path from view + optional tab */
+    function buildPath(view, tab) {
+        if (view === 'config' && tab && tab !== 'overview') {
+            return `/config/${tab}`;
+        }
+        if (view === 'config') return '/config';
+        return `/${view}`;
+    }
+
+    /** Parse the current URL path into { view, tab } */
+    function parseUrl() {
+        const path = window.location.pathname.replace(/\/+$/, '') || '/';
+        const parts = path.split('/').filter(Boolean);
+
+        if (parts.length === 0) return { view: '', tab: 'overview' };
+
+        const first = parts[0];
+        if (first === 'config') {
+            const tab = parts[1] && VALID_BOT_TABS.includes(parts[1]) ? parts[1] : 'overview';
+            return { view: 'config', tab };
+        }
+        if (VALID_VIEWS.includes(first)) {
+            return { view: first, tab: 'overview' };
+        }
+        return { view: '', tab: 'overview' };
+    }
+
+    /** Push URL without reload */
+    function pushUrl(view, tab) {
+        const newPath = buildPath(view, tab);
+        if (window.location.pathname !== newPath) {
+            history.pushState({ view, tab }, '', newPath);
+        }
+    }
+
     onMount(async () => {
         const authUser = await initAuthStore();
         if (authUser) {
@@ -34,6 +72,19 @@
             await fetchUserServers();
         }
         loading = false;
+
+        // Listen for browser back/forward
+        window.addEventListener('popstate', () => {
+            const { view, tab } = parseUrl();
+            if (view && allowedViews.some((v) => v.id === view)) {
+                currentView = view;
+                activeDashboardView.set(view);
+                if (tab) {
+                    currentBotTab = tab;
+                    activeBotTab.set(tab);
+                }
+            }
+        });
 
         // Listen for auth changes
         document.addEventListener('auth:loggedIn', (e) => {
@@ -59,9 +110,19 @@
         if (userData.id === SUPER_ADMIN_ID) {
             allowedViews.push({ id: 'recovery', label: 'Recovery', icon: 'fa-database' });
         }
-        if (allowedViews.length > 0 && !currentView) {
-            currentView = allowedViews[0].id;
+        if (allowedViews.length > 0) {
+            // Restore view from URL, or fall back to first allowed
+            const { view, tab } = parseUrl();
+            if (view && allowedViews.some((v) => v.id === view)) {
+                currentView = view;
+                currentBotTab = tab;
+            } else {
+                currentView = allowedViews[0].id;
+                currentBotTab = 'overview';
+            }
             activeDashboardView.set(currentView);
+            activeBotTab.set(currentBotTab);
+            pushUrl(currentView, currentBotTab);
         }
     }
 
@@ -92,6 +153,7 @@
             currentBotTab = tab;
             activeBotTab.set(tab);
         }
+        pushUrl(view, tab || currentBotTab);
     }
 
     function handleSelectServer(e) {

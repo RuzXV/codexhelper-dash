@@ -23,20 +23,15 @@
     let refreshingEmbed = false;
     let postingSignup = false;
 
-    function secondsToTime(seconds) {
-        const h = Math.floor(seconds / 3600);
-        const m = Math.floor((seconds % 3600) / 60);
-        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-    }
-    function timeToSeconds(timeStr) {
-        if (!timeStr) return 3600;
-        const [h, m] = timeStr.split(':').map(Number);
-        return h * 3600 + m * 60;
+    let reminderHours = Math.floor((currentConfig.reminder_interval || 3600) / 3600);
+    let reminderMinutes = Math.floor(((currentConfig.reminder_interval || 3600) % 3600) / 60);
+
+    function getReminderSeconds() {
+        return (reminderHours || 0) * 3600 + (reminderMinutes || 0) * 60;
     }
 
-    let reminderTime = secondsToTime(currentConfig.reminder_interval || 3600);
     $: {
-        const timeSec = timeToSeconds(reminderTime);
+        const timeSec = getReminderSeconds();
         const configChanged =
             JSON.stringify({ ...currentConfig, reminder_interval: timeSec }) !== JSON.stringify(originalConfig);
         hasUnsavedChanges = configChanged;
@@ -52,11 +47,11 @@
                     channel_id: currentConfig.channel_id,
                     admin_role_id: currentConfig.admin_role_id,
                     notification_role_id: currentConfig.notification_role_id,
-                    reminder_interval: timeToSeconds(reminderTime),
+                    reminder_interval: getReminderSeconds(),
                 }),
             });
             originalConfig = JSON.parse(
-                JSON.stringify({ ...currentConfig, reminder_interval: timeToSeconds(reminderTime) }),
+                JSON.stringify({ ...currentConfig, reminder_interval: getReminderSeconds() }),
             );
             hasUnsavedChanges = false;
             dispatch('updated');
@@ -70,7 +65,8 @@
 
     function discardChanges() {
         currentConfig = JSON.parse(JSON.stringify(originalConfig));
-        reminderTime = secondsToTime(currentConfig.reminder_interval);
+        reminderHours = Math.floor((currentConfig.reminder_interval || 3600) / 3600);
+        reminderMinutes = Math.floor(((currentConfig.reminder_interval || 3600) % 3600) / 60);
     }
 
     async function deleteAlliance() {
@@ -279,10 +275,19 @@
             </div>
 
             <div class="setting-group">
-                <label for="rem-{allianceTag}"
+                <label for="rem-h-{allianceTag}"
                     ><i class="fas fa-hourglass-half"></i> Reminder Interval</label
                 >
-                <input id="rem-{allianceTag}" type="time" class="modern-input" bind:value={reminderTime} />
+                <div class="duration-inputs">
+                    <div class="duration-field">
+                        <input id="rem-h-{allianceTag}" type="number" class="modern-input" min="0" max="23" bind:value={reminderHours} />
+                        <span class="duration-label">hr</span>
+                    </div>
+                    <div class="duration-field">
+                        <input id="rem-m-{allianceTag}" type="number" class="modern-input" min="0" max="59" bind:value={reminderMinutes} />
+                        <span class="duration-label">min</span>
+                    </div>
+                </div>
             </div>
 
             <div class="setting-group">
@@ -622,6 +627,32 @@
         border-color: var(--accent-blue);
         box-shadow: var(--focus-ring);
         outline: none;
+    }
+
+    .duration-inputs {
+        display: flex;
+        gap: 8px;
+    }
+    .duration-field {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .duration-field .modern-input {
+        width: 100%;
+        text-align: center;
+        -moz-appearance: textfield;
+    }
+    .duration-field .modern-input::-webkit-inner-spin-button,
+    .duration-field .modern-input::-webkit-outer-spin-button {
+        opacity: 1;
+    }
+    .duration-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        flex-shrink: 0;
     }
 
     .custom-select-container {
