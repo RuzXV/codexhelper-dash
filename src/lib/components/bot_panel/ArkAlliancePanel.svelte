@@ -225,197 +225,191 @@
         </div>
     </div>
 
-    <div class="panel-content-split">
-        <div class="config-column">
-            <div class="config-section sticky-card">
-                <div class="config-title"><i class="fas fa-cogs"></i> Configuration</div>
-                    <div class="settings-list">
-                        <div class="setting-group">
-                            <label for="ch-{allianceTag}"><i class="fas fa-hashtag"></i> Signup Channel</label>
-                            <div class="custom-select-container">
+    <div class="config-section">
+        <div class="config-title"><i class="fas fa-cogs"></i> Configuration</div>
+        <div class="config-row">
+            <div class="setting-group">
+                <label for="ch-{allianceTag}"><i class="fas fa-hashtag"></i> Signup Channel</label>
+                <div class="custom-select-container">
+                    <button
+                        type="button"
+                        class="custom-select-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded={openDropdownId === 'channel'}
+                        on:click={(e) => toggleDropdown('channel', e)}
+                    >
+                        <span
+                            class:placeholder={!currentConfig.channel_id ||
+                                currentConfig.channel_id === 'none'}
+                        >
+                            {getName(currentConfig.channel_id, 'channel')}
+                        </span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </button>
+                    {#if openDropdownId === 'channel'}
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <!-- svelte-ignore a11y_no_static_element_interactions -->
+                        <div class="custom-dropdown-menu" on:click|stopPropagation>
+                            <input
+                                id="search-channel"
+                                class="dropdown-search"
+                                bind:value={dropdownSearch}
+                                placeholder="Search channels..."
+                            />
+                            <div class="options-list">
                                 <button
-                                    type="button"
-                                    class="custom-select-trigger"
-                                    aria-haspopup="listbox"
-                                    aria-expanded={openDropdownId === 'channel'}
-                                    on:click={(e) => toggleDropdown('channel', e)}
+                                    class="dropdown-option danger"
+                                    on:click={() => selectItem('channel_id', 'none')}>⛔ Disabled</button
                                 >
-                                    <span
-                                        class:placeholder={!currentConfig.channel_id ||
-                                            currentConfig.channel_id === 'none'}
+                                {#each channels.filter((c) => c.name
+                                        .toLowerCase()
+                                        .includes(dropdownSearch.toLowerCase())) as ch}
+                                    <button
+                                        class="dropdown-option"
+                                        on:click={() => selectItem('channel_id', ch.id)}
                                     >
-                                        {getName(currentConfig.channel_id, 'channel')}
-                                    </span>
-                                    <i class="fas fa-chevron-down arrow"></i>
-                                </button>
-                                {#if openDropdownId === 'channel'}
-                                    <!-- svelte-ignore a11y_click_events_have_key_events -->
-                                    <!-- svelte-ignore a11y_no_static_element_interactions -->
-                                    <div class="custom-dropdown-menu" on:click|stopPropagation>
-                                        <input
-                                            id="search-channel"
-                                            class="dropdown-search"
-                                            bind:value={dropdownSearch}
-                                            placeholder="Search channels..."
-                                        />
-                                        <div class="options-list">
-                                            <button
-                                                class="dropdown-option danger"
-                                                on:click={() => selectItem('channel_id', 'none')}>⛔ Disabled</button
-                                            >
-                                            {#each channels.filter((c) => c.name
-                                                    .toLowerCase()
-                                                    .includes(dropdownSearch.toLowerCase())) as ch}
-                                                <button
-                                                    class="dropdown-option"
-                                                    on:click={() => selectItem('channel_id', ch.id)}
-                                                >
-                                                    <i class="fas fa-hashtag text-muted"></i>
-                                                    {ch.name}
-                                                </button>
-                                            {/each}
-                                        </div>
-                                    </div>
-                                {/if}
+                                        <i class="fas fa-hashtag text-muted"></i>
+                                        {ch.name}
+                                    </button>
+                                {/each}
                             </div>
                         </div>
+                    {/if}
+                </div>
+            </div>
 
-                        <div class="setting-group">
-                            <label for="rem-{allianceTag}"
-                                ><i class="fas fa-hourglass-half"></i> Reminder Interval</label
-                            >
-                            <input id="rem-{allianceTag}" type="time" class="modern-input" bind:value={reminderTime} />
-                        </div>
+            <div class="setting-group">
+                <label for="rem-{allianceTag}"
+                    ><i class="fas fa-hourglass-half"></i> Reminder Interval</label
+                >
+                <input id="rem-{allianceTag}" type="time" class="modern-input" bind:value={reminderTime} />
+            </div>
 
-                        <div class="setting-group">
-                            <label for="admin-{allianceTag}"><i class="fas fa-user-shield"></i> Admin Role</label>
-                            <div class="custom-select-container">
+            <div class="setting-group">
+                <label for="admin-{allianceTag}"><i class="fas fa-user-shield"></i> Admin Role</label>
+                <div class="custom-select-container">
+                    <button
+                        type="button"
+                        class="custom-select-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded={openDropdownId === 'admin'}
+                        on:click={(e) => toggleDropdown('admin', e)}
+                    >
+                        <span class:placeholder={!currentConfig.admin_role_id}>
+                            {getName(currentConfig.admin_role_id, 'role')}
+                        </span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </button>
+                    {#if openDropdownId === 'admin'}
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <!-- svelte-ignore a11y_no_static_element_interactions -->
+                        <div class="custom-dropdown-menu" on:click|stopPropagation>
+                            <input
+                                id="search-admin"
+                                class="dropdown-search"
+                                bind:value={dropdownSearch}
+                                placeholder="Search roles..."
+                            />
+                            <div class="options-list">
                                 <button
-                                    type="button"
-                                    class="custom-select-trigger"
-                                    aria-haspopup="listbox"
-                                    aria-expanded={openDropdownId === 'admin'}
-                                    on:click={(e) => toggleDropdown('admin', e)}
+                                    class="dropdown-option danger"
+                                    on:click={() => selectItem('admin_role_id', null)}>None</button
                                 >
-                                    <span class:placeholder={!currentConfig.admin_role_id}>
-                                        {getName(currentConfig.admin_role_id, 'role')}
-                                    </span>
-                                    <i class="fas fa-chevron-down arrow"></i>
-                                </button>
-                                {#if openDropdownId === 'admin'}
-                                    <!-- svelte-ignore a11y_click_events_have_key_events -->
-                                    <!-- svelte-ignore a11y_no_static_element_interactions -->
-                                    <div class="custom-dropdown-menu" on:click|stopPropagation>
-                                        <input
-                                            id="search-admin"
-                                            class="dropdown-search"
-                                            bind:value={dropdownSearch}
-                                            placeholder="Search roles..."
-                                        />
-                                        <div class="options-list">
-                                            <button
-                                                class="dropdown-option danger"
-                                                on:click={() => selectItem('admin_role_id', null)}>None</button
-                                            >
-                                            {#each roles.filter((r) => r.name
-                                                    .toLowerCase()
-                                                    .includes(dropdownSearch.toLowerCase())) as r}
-                                                <button
-                                                    class="dropdown-option"
-                                                    on:click={() => selectItem('admin_role_id', r.id)}
-                                                >
-                                                    <span
-                                                        class="role-dot"
-                                                        style="background-color: #{r.color?.toString(16) || '999'}"
-                                                    ></span>
-                                                    {r.name}
-                                                </button>
-                                            {/each}
-                                        </div>
-                                    </div>
-                                {/if}
+                                {#each roles.filter((r) => r.name
+                                        .toLowerCase()
+                                        .includes(dropdownSearch.toLowerCase())) as r}
+                                    <button
+                                        class="dropdown-option"
+                                        on:click={() => selectItem('admin_role_id', r.id)}
+                                    >
+                                        <span
+                                            class="role-dot"
+                                            style="background-color: #{r.color?.toString(16) || '999'}"
+                                        ></span>
+                                        {r.name}
+                                    </button>
+                                {/each}
                             </div>
                         </div>
+                    {/if}
+                </div>
+            </div>
 
-                        <div class="setting-group">
-                            <label for="not-{allianceTag}"><i class="fas fa-bell"></i> Notification Role</label>
-                            <div class="custom-select-container">
+            <div class="setting-group">
+                <label for="not-{allianceTag}"><i class="fas fa-bell"></i> Notification Role</label>
+                <div class="custom-select-container">
+                    <button
+                        type="button"
+                        class="custom-select-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded={openDropdownId === 'notify'}
+                        on:click={(e) => toggleDropdown('notify', e)}
+                    >
+                        <span class:placeholder={!currentConfig.notification_role_id}>
+                            {getName(currentConfig.notification_role_id, 'role')}
+                        </span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </button>
+                    {#if openDropdownId === 'notify'}
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <!-- svelte-ignore a11y_no_static_element_interactions -->
+                        <div class="custom-dropdown-menu" on:click|stopPropagation>
+                            <input
+                                id="search-notify"
+                                class="dropdown-search"
+                                bind:value={dropdownSearch}
+                                placeholder="Search roles..."
+                            />
+                            <div class="options-list">
                                 <button
-                                    type="button"
-                                    class="custom-select-trigger"
-                                    aria-haspopup="listbox"
-                                    aria-expanded={openDropdownId === 'notify'}
-                                    on:click={(e) => toggleDropdown('notify', e)}
+                                    class="dropdown-option danger"
+                                    on:click={() => selectItem('notification_role_id', null)}>None</button
                                 >
-                                    <span class:placeholder={!currentConfig.notification_role_id}>
-                                        {getName(currentConfig.notification_role_id, 'role')}
-                                    </span>
-                                    <i class="fas fa-chevron-down arrow"></i>
-                                </button>
-                                {#if openDropdownId === 'notify'}
-                                    <!-- svelte-ignore a11y_click_events_have_key_events -->
-                                    <!-- svelte-ignore a11y_no_static_element_interactions -->
-                                    <div class="custom-dropdown-menu" on:click|stopPropagation>
-                                        <input
-                                            id="search-notify"
-                                            class="dropdown-search"
-                                            bind:value={dropdownSearch}
-                                            placeholder="Search roles..."
-                                        />
-                                        <div class="options-list">
-                                            <button
-                                                class="dropdown-option danger"
-                                                on:click={() => selectItem('notification_role_id', null)}>None</button
-                                            >
-                                            {#each roles.filter((r) => r.name
-                                                    .toLowerCase()
-                                                    .includes(dropdownSearch.toLowerCase())) as r}
-                                                <button
-                                                    class="dropdown-option"
-                                                    on:click={() => selectItem('notification_role_id', r.id)}
-                                                >
-                                                    <span
-                                                        class="role-dot"
-                                                        style="background-color: #{r.color?.toString(16) || '999'}"
-                                                    ></span>
-                                                    {r.name}
-                                                </button>
-                                            {/each}
-                                        </div>
-                                    </div>
-                                {/if}
+                                {#each roles.filter((r) => r.name
+                                        .toLowerCase()
+                                        .includes(dropdownSearch.toLowerCase())) as r}
+                                    <button
+                                        class="dropdown-option"
+                                        on:click={() => selectItem('notification_role_id', r.id)}
+                                    >
+                                        <span
+                                            class="role-dot"
+                                            style="background-color: #{r.color?.toString(16) || '999'}"
+                                        ></span>
+                                        {r.name}
+                                    </button>
+                                {/each}
                             </div>
                         </div>
-                    </div>
+                    {/if}
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="teams-column">
-            <div class="teams-section">
-                <div class="teams-title"><i class="fas fa-users"></i> Signups & Teams</div>
-                    <div class="teams-grid">
-                        {#each Object.keys(data.teams).sort() as num}
-                            <ArkTeamCard
-                                {guildId}
-                                {allianceTag}
-                                teamNumber={num}
-                                teamData={data.teams[num]}
-                                signups={data.signups.filter((s) => s.team_number == num)}
-                                {roles}
-                                on:updated={() => dispatch('updated')}
-                            />
-                        {/each}
+    <div class="teams-section">
+        <div class="teams-title"><i class="fas fa-users"></i> Signups & Teams</div>
+        <div class="teams-grid">
+            {#each Object.keys(data.teams).sort() as num}
+                <ArkTeamCard
+                    {guildId}
+                    {allianceTag}
+                    teamNumber={num}
+                    teamData={data.teams[num]}
+                    signups={data.signups.filter((s) => s.team_number == num)}
+                    {roles}
+                    on:updated={() => dispatch('updated')}
+                />
+            {/each}
 
-                        {#if Object.keys(data.teams).length < 3}
-                            <button class="add-team-card" on:click={addTeam}>
-                                <div class="add-icon-circle">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                                <span>Create New Team</span>
-                            </button>
-                        {/if}
+            {#if Object.keys(data.teams).length < 3}
+                <button class="add-team-card" on:click={addTeam}>
+                    <div class="add-icon-circle">
+                        <i class="fas fa-plus"></i>
                     </div>
-            </div>
+                    <span>Create New Team</span>
+                </button>
+            {/if}
         </div>
     </div>
 
@@ -536,36 +530,11 @@
         border-color: var(--accent-red);
     }
 
-    .panel-content-split {
-        display: flex;
-        gap: 24px;
-        align-items: flex-start;
-    }
-    .config-column {
-        flex: 0 0 340px;
-    }
-    .teams-column {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    @media (max-width: 900px) {
-        .panel-content-split {
-            flex-direction: column;
-        }
-        .config-column {
-            width: 100%;
-            flex: auto;
-        }
-    }
-
     .config-section {
         background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: 12px;
-        padding: 20px;
+        padding: 20px 24px;
         box-shadow: var(--card-shadow), var(--card-highlight);
     }
     .config-title {
@@ -585,6 +554,22 @@
         color: var(--accent-blue);
         font-size: 0.8rem;
     }
+    .config-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 1100px) {
+        .config-row {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 600px) {
+        .config-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .teams-section {
         display: flex;
         flex-direction: column;
@@ -603,16 +588,6 @@
     .teams-title i {
         color: var(--accent-blue);
         font-size: 0.8rem;
-    }
-    .sticky-card {
-        position: sticky;
-        top: 20px;
-    }
-
-    .settings-list {
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
     }
     .setting-group {
         display: flex;
@@ -733,9 +708,19 @@
 
     .teams-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
         align-items: stretch;
+    }
+    @media (max-width: 1100px) {
+        .teams-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 600px) {
+        .teams-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     .add-team-card {
