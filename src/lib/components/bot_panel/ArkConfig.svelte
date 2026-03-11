@@ -135,25 +135,26 @@
         display: flex;
         flex-direction: column;
         gap: 0;
+        animation: cardSlideUp var(--transition-smooth) both;
     }
 
     .section-header {
         display: flex;
         align-items: center;
         padding-bottom: 0;
-        border-bottom: 1px solid var(--border-color);
-        min-height: 45px;
+        border-bottom: 1px solid var(--card-border);
+        min-height: 48px;
     }
 
     .header-loading {
         color: var(--text-secondary);
-        padding: 10px;
+        padding: 12px;
         font-style: italic;
     }
 
     .tabs-container {
         display: flex;
-        gap: 0;
+        gap: 2px;
         overflow-x: auto;
         width: 100%;
         scrollbar-width: none;
@@ -167,13 +168,13 @@
         background: transparent;
         border: 1px solid transparent;
         border-bottom: none;
-        padding: 14px 20px;
+        padding: 14px 24px;
         color: var(--text-secondary);
         cursor: pointer;
         font-weight: 600;
-        border-radius: 8px 8px 0 0;
-        transition: all 0.2s;
-        font-size: 1.1rem;
+        border-radius: 10px 10px 0 0;
+        transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+        font-size: 1.05rem;
         white-space: nowrap;
         display: flex;
         align-items: center;
@@ -194,19 +195,23 @@
     }
 
     .tab-btn.active {
-        background: var(--bg-secondary);
+        background: var(--card-bg);
         color: var(--accent-blue);
-        border: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--bg-secondary);
+        border: 1px solid var(--card-border);
+        border-bottom: 1px solid transparent;
         margin-bottom: -1px;
         z-index: 10;
+        backdrop-filter: blur(12px);
     }
     .tab-content {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
         border-top: none;
-        border-radius: 0 0 8px 8px;
-        padding: 20px;
+        border-radius: 0 0 12px 12px;
+        padding: 24px;
+        box-shadow: var(--card-shadow);
     }
 
     .tab-btn.add-btn {
@@ -219,14 +224,17 @@
     }
 
     .create-panel {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        padding: 20px;
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        padding: 24px;
+        border-radius: 12px;
         margin-bottom: 20px;
+        box-shadow: var(--card-shadow), var(--card-highlight);
     }
     .create-panel h4 {
-        margin: 0 0 15px 0;
+        margin: 0 0 16px 0;
         color: var(--text-primary);
     }
     .create-row {
@@ -235,37 +243,53 @@
     }
     .create-row input {
         flex: 1;
-        padding: 10px;
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        padding: 12px 14px;
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
         color: var(--text-primary);
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .create-row input:focus {
+        border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
+        outline: none;
     }
     .btn-confirm {
         background: var(--accent-blue);
         color: white;
         border: none;
-        padding: 0 20px;
-        border-radius: 6px;
+        padding: 0 24px;
+        border-radius: 8px;
         cursor: pointer;
         font-weight: 600;
+        transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .btn-confirm:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(79, 140, 247, 0.25);
     }
     .btn-cancel {
         background: transparent;
         color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        padding: 0 15px;
-        border-radius: 6px;
+        border: 1px solid var(--card-border);
+        padding: 0 18px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: color var(--transition-base), background var(--transition-base);
+    }
+    .btn-cancel:hover {
+        color: var(--text-primary);
+        background: var(--bg-tertiary);
     }
 
     .empty-state {
         text-align: center;
-        padding: 40px;
+        padding: 48px;
         color: var(--text-secondary);
-        background: var(--bg-secondary);
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border: 1px dashed var(--card-border);
     }
     .empty-state i {
         font-size: 2rem;

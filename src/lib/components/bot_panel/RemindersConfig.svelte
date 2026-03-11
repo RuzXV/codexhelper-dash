@@ -332,15 +332,16 @@
     .reminders-container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 24px;
         padding-bottom: 80px;
+        animation: cardSlideUp var(--transition-smooth) both;
     }
 
     .btn-add {
         background: var(--accent-blue);
         color: white;
         border: none;
-        padding: 6px 16px;
+        padding: 8px 18px;
         border-radius: 20px;
         font-weight: 600;
         font-size: 0.85rem;
@@ -348,23 +349,25 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        transition: opacity 0.2s;
+        transition: opacity var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
     }
     .btn-add:hover {
         opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(79, 140, 247, 0.25);
     }
 
     .custom-list {
         padding: 20px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 15px;
+        gap: 20px;
     }
 
     .empty-state {
         grid-column: 1 / -1;
         text-align: center;
-        padding: 30px;
+        padding: 40px;
         color: var(--text-secondary);
     }
     .empty-state i {
@@ -378,7 +381,7 @@
 
     .loading-state {
         text-align: center;
-        padding: 40px;
+        padding: 48px;
         color: var(--text-secondary);
     }
 

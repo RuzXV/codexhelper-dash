@@ -199,16 +199,21 @@
 
 <style>
     .section-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
         overflow: visible;
+        box-shadow: var(--card-shadow), var(--card-highlight);
+        animation: cardSlideUp var(--transition-smooth) both;
     }
     .section-header {
-        padding: 20px;
-        border-bottom: 1px solid var(--border-color);
-        background: transparent;
+        padding: 20px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        background: rgba(255, 255, 255, 0.02);
         display: block;
+        border-radius: 12px 12px 0 0;
     }
     .section-desc {
         color: var(--text-secondary);
@@ -218,17 +223,18 @@
     .settings-grid {
         display: flex;
         flex-direction: column;
+        padding: 4px;
     }
     .setting-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 20px;
-        border-bottom: 1px solid var(--border-color);
-        transition: background 0.2s;
+        padding: 16px 20px;
+        border-radius: 8px;
+        transition: background var(--transition-fast);
     }
     .setting-row:hover {
-        background: var(--bg-tertiary);
+        background: var(--row-hover);
     }
     .group-title-row {
         display: flex;
@@ -257,14 +263,22 @@
         align-items: center;
         justify-content: center;
         padding: 10px 14px;
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
         color: var(--text-primary);
         cursor: pointer;
         font-size: 0.95rem;
-        transition: border 0.2s;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
         position: relative;
+    }
+    .custom-select-trigger:hover {
+        border-color: var(--border-hover);
+    }
+    .custom-select-trigger:focus {
+        border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
+        outline: none;
     }
     .selected-text {
         text-align: center;
@@ -273,7 +287,7 @@
     .arrow {
         font-size: 0.8rem;
         opacity: 0.7;
-        transition: transform 0.2s;
+        transition: transform var(--transition-base);
         position: absolute;
         right: 14px;
     }
@@ -282,33 +296,34 @@
     }
     .custom-dropdown-menu {
         position: absolute;
-        top: calc(100% + 5px);
+        top: calc(100% + 6px);
         right: 0;
         width: 100%;
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        background: var(--bg-card);
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
         z-index: 50;
         overflow: hidden;
-        box-shadow: var(--shadow-md);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
     .dropdown-search {
         padding: 8px;
-        border-bottom: 1px solid var(--border-color);
-        background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.02);
     }
     .dropdown-search input {
         width: 100%;
         background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        padding: 6px 10px;
-        border-radius: 4px;
+        border: 1px solid var(--card-border);
+        padding: 8px 12px;
+        border-radius: 6px;
         color: var(--text-primary);
         font-size: 0.9rem;
     }
     .dropdown-options-list {
         max-height: 250px;
         overflow-y: auto;
+        padding: 4px;
     }
     .dropdown-option {
         width: 100%;
@@ -317,17 +332,18 @@
         justify-content: flex-start;
         border: none;
         display: flex;
-        padding: 8px 12px;
+        padding: 9px 12px;
         color: var(--text-secondary);
         cursor: pointer;
-        display: flex;
         align-items: center;
         gap: 8px;
         font-size: 0.9rem;
+        border-radius: 6px;
+        transition: background var(--transition-fast), color var(--transition-fast);
     }
     .dropdown-option:hover {
-        background: var(--accent-blue);
-        color: white;
+        background: rgba(79, 140, 247, 0.12);
+        color: var(--accent-blue-bright);
     }
     .dropdown-option.selected {
         background: var(--accent-blue-light);
@@ -337,12 +353,16 @@
     .dropdown-option.danger {
         color: var(--accent-red);
     }
+    .dropdown-option.danger:hover {
+        background: var(--accent-red-light);
+        color: var(--accent-red);
+    }
     .info-note {
         margin-top: 15px;
         background: var(--accent-blue-light);
         border-left: 3px solid var(--accent-blue);
-        padding: 12px 15px;
-        border-radius: 4px;
+        padding: 14px 18px;
+        border-radius: 8px;
         color: var(--text-secondary);
         font-size: 0.85rem;
         display: flex;

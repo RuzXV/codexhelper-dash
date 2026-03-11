@@ -143,94 +143,50 @@
             <i class="fas fa-circle-notch fa-spin"></i> Loading Overview...
         </div>
     {:else}
-        <div class="overview-grid">
-            <div class="info-card">
-                <div class="card-header">
-                    <h3><i class="fas fa-network-wired"></i> Command Channels</h3>
-                </div>
-                <div class="card-content">
-                    <ul class="status-list">
-                        {#each Object.entries(GROUP_LABELS) as [key, label]}
-                            <li class="status-item">
-                                {#if channelSettings[key] && channelSettings[key] !== 'none'}
-                                    <i class="fas fa-check-circle status-icon success"></i>
-                                    <span class="label">{label}</span>
-                                    <span class="value success-text">{getChannelMention(channelSettings[key])}</span>
-                                {:else}
-                                    <i class="fas fa-times-circle status-icon error"></i>
-                                    <span class="label">{label}</span>
-                                    <span class="value error-text">Not Configured</span>
-                                {/if}
-                            </li>
-                        {/each}
-                    </ul>
-                </div>
+        <div class="features-strip">
+            <span class="strip-label"><i class="fas fa-cogs"></i> Features</span>
+            <div class="feature-pills">
+                {#each [
+                    { key: 'calendar', label: 'Calendar', icon: 'fa-calendar-alt' },
+                    { key: 'ark', label: 'Ark', icon: 'fa-chess-rook' },
+                    { key: 'mge', label: 'MGE', icon: 'fa-trophy' },
+                    { key: 'ruins', label: 'Ruins', icon: 'fa-landmark' },
+                    { key: 'altar', label: 'Altar', icon: 'fa-moon' },
+                ] as feat}
+                    <div class="feature-pill" class:active={features[feat.key]?.enabled} title={features[feat.key]?.enabled ? getChannelMention(features[feat.key].channel_id) : 'Not Configured'}>
+                        <i class="fas {feat.icon}"></i>
+                        <span>{feat.label}</span>
+                        {#if features[feat.key]?.enabled}
+                            <i class="fas fa-check pill-status"></i>
+                        {:else}
+                            <i class="fas fa-minus pill-status inactive"></i>
+                        {/if}
+                    </div>
+                {/each}
             </div>
+        </div>
 
-            <div class="info-card">
-                <div class="card-header">
-                    <h3><i class="fas fa-cogs"></i> Feature Status</h3>
-                </div>
-                <div class="card-content">
-                    <ul class="status-list">
-                        <li class="status-item">
-                            {#if features.calendar.enabled}
-                                <i class="fas fa-check-circle status-icon success"></i>
-                                <span class="label">Event Calendar</span>
-                                <span class="value success-text">{getChannelMention(features.calendar.channel_id)}</span
-                                >
-                            {:else}
-                                <i class="fas fa-times-circle status-icon error"></i>
-                                <span class="label">Event Calendar</span>
-                                <span class="value error-text">Not Configured</span>
-                            {/if}
-                        </li>
-                        <li class="status-item">
-                            {#if features.ark.enabled}
-                                <i class="fas fa-check-circle status-icon success"></i>
-                                <span class="label">Ark of Osiris</span>
-                                <span class="value success-text">{getChannelMention(features.ark.channel_id)}</span>
-                            {:else}
-                                <i class="fas fa-times-circle status-icon error"></i>
-                                <span class="label">Ark of Osiris</span>
-                                <span class="value error-text">Not Configured</span>
-                            {/if}
-                        </li>
-                        <li class="status-item">
-                            {#if features.mge.enabled}
-                                <i class="fas fa-check-circle status-icon success"></i>
-                                <span class="label">MGE Signups</span>
-                                <span class="value success-text">{getChannelMention(features.mge.channel_id)}</span>
-                            {:else}
-                                <i class="fas fa-times-circle status-icon error"></i>
-                                <span class="label">MGE Signups</span>
-                                <span class="value error-text">Not Configured</span>
-                            {/if}
-                        </li>
-                        <li class="status-item">
-                            {#if features.ruins.enabled}
-                                <i class="fas fa-check-circle status-icon success"></i>
-                                <span class="label">Ancient Ruins</span>
-                                <span class="value success-text">{getChannelMention(features.ruins.channel_id)}</span>
-                            {:else}
-                                <i class="fas fa-times-circle status-icon error"></i>
-                                <span class="label">Ancient Ruins</span>
-                                <span class="value error-text">Not Configured</span>
-                            {/if}
-                        </li>
-                        <li class="status-item">
-                            {#if features.altar.enabled}
-                                <i class="fas fa-check-circle status-icon success"></i>
-                                <span class="label">Altar of Darkness</span>
-                                <span class="value success-text">{getChannelMention(features.altar.channel_id)}</span>
-                            {:else}
-                                <i class="fas fa-times-circle status-icon error"></i>
-                                <span class="label">Altar of Darkness</span>
-                                <span class="value error-text">Not Configured</span>
-                            {/if}
-                        </li>
-                    </ul>
-                </div>
+        <div class="channels-section">
+            <div class="section-title">
+                <i class="fas fa-network-wired"></i>
+                <span>Command Channels</span>
+            </div>
+            <div class="channels-grid">
+                {#each Object.entries(GROUP_LABELS) as [key, label]}
+                    <div class="channel-tile" class:configured={channelSettings[key] && channelSettings[key] !== 'none'}>
+                        <div class="tile-indicator" class:active={channelSettings[key] && channelSettings[key] !== 'none'}></div>
+                        <div class="tile-content">
+                            <span class="tile-label">{label}</span>
+                            <span class="tile-value" class:dimmed={!channelSettings[key] || channelSettings[key] === 'none'}>
+                                {#if channelSettings[key] && channelSettings[key] !== 'none'}
+                                    {getChannelMention(channelSettings[key])}
+                                {:else}
+                                    Not Set
+                                {/if}
+                            </span>
+                        </div>
+                    </div>
+                {/each}
             </div>
         </div>
     {/if}
@@ -271,17 +227,21 @@
     .overview-container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 24px;
+        animation: cardSlideUp var(--transition-smooth) both;
     }
 
     .overview-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: var(--bg-secondary);
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow), var(--card-highlight);
         flex-wrap: wrap;
         gap: 20px;
     }
@@ -293,65 +253,70 @@
     .server-identity {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 16px;
     }
     .server-icon-lg {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         object-fit: cover;
+        border: 2px solid var(--card-border);
     }
     .server-icon-placeholder {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         background: var(--bg-tertiary);
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: bold;
         color: var(--text-secondary);
+        border: 2px solid var(--card-border);
     }
     .server-text h2 {
         margin: 0;
         font-size: 1.4rem;
         color: var(--text-primary);
+        letter-spacing: -0.01em;
     }
     .server-id {
         font-size: 0.8rem;
         color: var(--text-secondary);
         font-family: monospace;
+        margin-top: 2px;
     }
 
     .patron-badge {
-        background: var(--bg-tertiary);
-        padding: 8px 16px;
-        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 18px;
+        border-radius: 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 10px;
-        border: 1px solid var(--accent-blue);
-        transition: all 0.2s;
+        gap: 12px;
+        border: 1px solid rgba(79, 140, 247, 0.25);
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
     }
 
     .patron-badge.bypass {
-        border-color: var(--accent-purple);
+        border-color: rgba(167, 139, 250, 0.3);
         background: var(--accent-purple-light);
     }
 
     .patron-badge.warning {
-        border-color: var(--accent-yellow);
+        border-color: rgba(251, 191, 36, 0.3);
         color: var(--accent-yellow);
     }
 
     .patron-label {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.06em;
         color: var(--text-secondary);
         margin-bottom: 0;
         white-space: nowrap;
+        font-weight: 600;
     }
 
     .patron-info {
@@ -364,7 +329,7 @@
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--card-border);
     }
 
     .patron-badge.bypass .patron-avatar {
@@ -377,89 +342,138 @@
         font-size: 0.95rem;
     }
 
-    .overview-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 20px;
-    }
-
-    .info-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .card-header {
-        padding: 15px 20px;
-        border-bottom: 1px solid var(--border-color);
-        background: transparent;
-    }
-    .card-header h3 {
-        margin: 0;
-        font-size: 1.1rem;
-        color: var(--text-primary);
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-
-    .card-content {
-        padding: 0;
-    }
-
-    .status-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .status-item {
+    .features-strip {
         display: flex;
         align-items: center;
-        padding: 12px 20px;
-        border-bottom: 1px solid var(--border-color);
-        font-size: 0.95rem;
-        gap: 12px;
+        gap: 16px;
+        flex-wrap: wrap;
     }
-    .status-item:last-child {
-        border-bottom: none;
+    .strip-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
     }
-
-    .status-icon {
-        font-size: 1.1rem;
+    .feature-pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
     }
-    .status-icon.success {
+    .feature-pill {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        cursor: default;
+        transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base);
+    }
+    .feature-pill.active {
+        background: var(--accent-green-light);
+        border-color: rgba(34, 197, 94, 0.2);
         color: var(--accent-green);
     }
-    .status-icon.error {
-        color: var(--text-muted);
-        opacity: 0.5;
+    .feature-pill i:first-child {
+        font-size: 0.75rem;
+    }
+    .pill-status {
+        font-size: 0.65rem;
+        margin-left: 2px;
+    }
+    .pill-status.inactive {
+        opacity: 0.4;
     }
 
-    .label {
-        flex-grow: 1;
-        color: var(--text-primary);
-        font-weight: 500;
+    .channels-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: var(--card-shadow), var(--card-highlight);
     }
-
-    .value {
+    .section-title {
         font-size: 0.9rem;
-        font-family: monospace;
-        background: var(--bg-tertiary);
-        padding: 2px 6px;
-        border-radius: 4px;
+        font-weight: 600;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
     }
-    .success-text {
+    .section-title i {
+        color: var(--accent-blue);
+        font-size: 0.85rem;
+    }
+    .channels-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 10px;
+    }
+    .channel-tile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
+        transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+    .channel-tile:hover {
+        background: var(--row-hover);
+        border-color: var(--card-border-hover);
+    }
+    .tile-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-muted);
+        opacity: 0.3;
+        flex-shrink: 0;
+    }
+    .tile-indicator.active {
+        background: var(--accent-green);
+        opacity: 1;
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+    }
+    .tile-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+    .tile-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    .tile-value {
+        font-size: 0.78rem;
         color: var(--text-secondary);
+        font-family: monospace;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
-    .error-text {
+    .tile-value.dimmed {
         color: var(--text-muted);
         font-style: italic;
+        font-family: inherit;
     }
 
     .loading-state {
-        padding: 40px;
+        padding: 48px;
         text-align: center;
         color: var(--text-secondary);
         font-size: 1.1rem;
@@ -472,16 +486,16 @@
     }
     .btn-deauth {
         background: transparent;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--card-border);
         color: var(--text-muted);
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s;
+        transition: border-color var(--transition-base), color var(--transition-base), background var(--transition-base);
         font-size: 0.85rem;
     }
     .btn-deauth:hover {
@@ -501,22 +515,25 @@
         align-items: center;
         justify-content: center;
         z-index: 2000;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(8px);
     }
     .modal-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
         width: 100%;
         max-width: 440px;
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+        animation: cardSlideUp var(--transition-smooth) both;
     }
     .modal-header {
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--border-color);
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--card-border);
     }
     .modal-header h3 {
         margin: 0;
@@ -524,7 +541,7 @@
         color: var(--text-primary);
     }
     .modal-body {
-        padding: 16px 20px;
+        padding: 20px 24px;
     }
     .modal-body p {
         margin: 0 0 10px 0;
@@ -543,18 +560,18 @@
         display: flex;
         justify-content: flex-end;
         gap: 10px;
-        padding: 12px 20px;
-        border-top: 1px solid var(--border-color);
+        padding: 16px 24px;
+        border-top: 1px solid var(--card-border);
     }
     .btn-modal-cancel {
         background: transparent;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--card-border);
         color: var(--text-secondary);
-        padding: 8px 18px;
-        border-radius: 6px;
+        padding: 10px 20px;
+        border-radius: 8px;
         cursor: pointer;
         font-weight: 500;
-        transition: all 0.2s;
+        transition: color var(--transition-base), background var(--transition-base);
     }
     .btn-modal-cancel:hover {
         background: var(--bg-tertiary);
@@ -564,14 +581,15 @@
         background: var(--accent-red);
         border: none;
         color: white;
-        padding: 8px 18px;
-        border-radius: 6px;
+        padding: 10px 20px;
+        border-radius: 8px;
         cursor: pointer;
         font-weight: 600;
-        transition: all 0.2s;
+        transition: background var(--transition-base), transform var(--transition-base);
     }
     .btn-modal-confirm:hover {
         background: var(--accent-red-hover);
+        transform: translateY(-1px);
     }
     .btn-modal-confirm:disabled,
     .btn-modal-cancel:disabled {
@@ -589,7 +607,7 @@
             align-items: flex-start;
             width: 100%;
         }
-        .overview-grid {
+        .channels-grid {
             grid-template-columns: 1fr;
         }
     }

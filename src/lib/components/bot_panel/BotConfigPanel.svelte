@@ -115,11 +115,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--bg-secondary);
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
         border-radius: 50%;
         margin-bottom: 20px;
         font-size: 2rem;
         color: var(--text-muted);
+        box-shadow: var(--card-shadow);
     }
 
     .no-server h2 {
@@ -153,7 +157,7 @@
         align-items: center;
         gap: 12px;
         padding-bottom: 16px;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--card-border);
     }
 
     .panel-header h1 {

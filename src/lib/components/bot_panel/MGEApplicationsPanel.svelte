@@ -450,17 +450,20 @@
         font-size: 0.85rem;
     }
     .btn-refresh {
-        background: var(--bg-tertiary);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
         color: var(--text-secondary);
-        padding: 8px 12px;
-        border-radius: 6px;
+        padding: 8px 14px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
     }
     .btn-refresh:hover {
         color: var(--text-primary);
         border-color: var(--accent-blue);
+        transform: translateY(-1px);
     }
 
     .filter-bar {
@@ -469,10 +472,10 @@
         flex-wrap: wrap;
     }
     .filter-chip {
-        background: var(--bg-tertiary);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
         color: var(--text-secondary);
-        padding: 6px 14px;
+        padding: 7px 16px;
         border-radius: 20px;
         cursor: pointer;
         font-size: 0.85rem;
@@ -480,11 +483,11 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        transition: all 0.2s;
+        transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
     }
     .filter-chip:hover {
         color: var(--text-primary);
-        border-color: var(--text-muted);
+        border-color: var(--card-border-hover);
     }
     .filter-chip.active {
         border-color: var(--accent-blue);
@@ -514,15 +517,18 @@
     }
 
     .rankings-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
         overflow: hidden;
+        box-shadow: var(--card-shadow), var(--card-highlight);
     }
     .card-header {
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--border-color);
-        background: transparent;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        background: rgba(255, 255, 255, 0.02);
     }
     .card-header h4 {
         margin: 0;
@@ -539,17 +545,21 @@
     .rankings-row {
         display: flex;
         align-items: center;
-        padding: 8px 16px;
-        border-bottom: 1px solid var(--border-color);
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         font-size: 0.85rem;
+        transition: background var(--transition-fast);
     }
     .rankings-row:last-child {
         border-bottom: none;
     }
+    .rankings-row:not(.header-row):hover {
+        background: var(--row-hover);
+    }
     .rankings-row.header-row {
         font-weight: 600;
         color: var(--text-secondary);
-        background: var(--bg-tertiary);
+        background: rgba(255, 255, 255, 0.02);
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -588,17 +598,22 @@
     .apps-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
     }
     .app-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
         overflow: hidden;
-        transition: border-color 0.2s;
+        box-shadow: var(--card-shadow), var(--card-highlight);
+        transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
     }
     .app-card:hover {
-        border-color: var(--text-muted);
+        border-color: var(--card-border-hover);
+        box-shadow: var(--card-shadow-hover), var(--card-highlight);
+        transform: translateY(-1px);
     }
     .app-card.expanded {
         border-color: var(--accent-blue);
@@ -608,12 +623,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 16px;
+        padding: 14px 20px;
         cursor: pointer;
-        transition: background 0.15s;
+        transition: background var(--transition-fast);
     }
     .app-card-header:hover {
-        background: var(--bg-tertiary);
+        background: var(--row-hover);
     }
     .app-main-info {
         display: flex;
@@ -643,7 +658,7 @@
         background: var(--accent-blue);
         color: white;
         padding: 2px 8px;
-        border-radius: 4px;
+        border-radius: 6px;
         font-size: 0.75rem;
         font-weight: 700;
     }
@@ -674,17 +689,17 @@
     .expand-icon {
         color: var(--text-muted);
         font-size: 0.8rem;
-        transition: transform 0.2s;
+        transition: transform var(--transition-base);
     }
     .expand-icon.rotated {
         transform: rotate(180deg);
     }
 
     .app-card-body {
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
     }
     .app-details {
-        padding: 16px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 0;
@@ -724,19 +739,20 @@
 
     .image-grid {
         display: flex;
-        gap: 8px;
+        gap: 10px;
         flex-wrap: wrap;
         margin-top: 4px;
     }
     .thumb-link {
         display: block;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
         overflow: hidden;
-        transition: border-color 0.2s;
+        transition: border-color var(--transition-base), transform var(--transition-base);
     }
     .thumb-link:hover {
         border-color: var(--accent-blue);
+        transform: translateY(-1px);
     }
     .thumb-img {
         width: 120px;
@@ -752,10 +768,10 @@
         align-items: center;
         justify-content: center;
         gap: 6px;
-        background: var(--bg-tertiary);
+        background: rgba(255, 255, 255, 0.02);
         color: var(--text-muted);
         font-size: 0.7rem;
-        border-radius: 4px;
+        border-radius: 6px;
     }
     :global(.img-expired i) {
         font-size: 1.4rem;
@@ -763,8 +779,8 @@
     }
 
     .app-actions {
-        padding: 12px 16px;
-        background: var(--bg-tertiary);
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.02);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -780,30 +796,35 @@
     }
     .rank-input {
         width: 70px;
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        padding: 6px 10px;
-        border-radius: 4px;
+        background: var(--bg-input, var(--bg-primary));
+        border: 1px solid var(--card-border);
+        padding: 7px 10px;
+        border-radius: 8px;
         color: var(--text-primary);
         font-size: 0.85rem;
         text-align: center;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
     }
     .rank-input:focus {
         border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
         outline: none;
     }
 
     .btn-sm {
         border: none;
-        padding: 6px 14px;
-        border-radius: 4px;
+        padding: 7px 16px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 0.8rem;
         font-weight: 600;
         display: flex;
         align-items: center;
         gap: 5px;
-        transition: all 0.15s;
+        transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+    .btn-sm:hover {
+        transform: translateY(-1px);
     }
     .btn-sm.accept {
         background: var(--accent-green-light);
@@ -835,10 +856,12 @@
     }
     .btn-sm.cancel:hover {
         color: var(--text-primary);
+        transform: none;
     }
     .btn-sm:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+        transform: none;
     }
 
     @media (max-width: 768px) {

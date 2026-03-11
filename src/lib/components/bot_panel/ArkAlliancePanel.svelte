@@ -227,11 +227,8 @@
 
     <div class="panel-content-split">
         <div class="config-column">
-            <div class="info-card sticky-card">
-                <div class="card-header">
-                    <h3><i class="fas fa-cogs"></i> Configuration</h3>
-                </div>
-                <div class="card-content">
+            <div class="config-section sticky-card">
+                <div class="config-title"><i class="fas fa-cogs"></i> Configuration</div>
                     <div class="settings-list">
                         <div class="setting-group">
                             <label for="ch-{allianceTag}"><i class="fas fa-hashtag"></i> Signup Channel</label>
@@ -390,17 +387,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
         <div class="teams-column">
-            <div class="info-card">
-                <div class="card-header">
-                    <h3><i class="fas fa-users"></i> Signups & Teams</h3>
-                </div>
-
-                <div class="card-content">
+            <div class="teams-section">
+                <div class="teams-title"><i class="fas fa-users"></i> Signups & Teams</div>
                     <div class="teams-grid">
                         {#each Object.keys(data.teams).sort() as num}
                             <ArkTeamCard
@@ -423,7 +415,6 @@
                             </button>
                         {/if}
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -435,7 +426,7 @@
     .alliance-panel {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 24px;
         padding-bottom: 80px;
     }
 
@@ -443,8 +434,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--card-border);
+        flex-wrap: wrap;
+        gap: 12px;
     }
     .header-info {
         display: flex;
@@ -456,20 +449,21 @@
         color: var(--text-primary);
         font-size: 1.5rem;
         font-weight: 700;
+        letter-spacing: -0.01em;
     }
     .highlight {
         color: var(--accent-blue);
     }
 
     .status-badge {
-        font-size: 0.75rem;
-        padding: 2px 8px;
-        border-radius: 12px;
+        font-size: 0.7rem;
+        padding: 3px 10px;
+        border-radius: 20px;
         background: var(--bg-tertiary);
         color: var(--text-muted);
         text-transform: uppercase;
         font-weight: 600;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.06em;
     }
     .status-badge.active {
         background: var(--accent-green-light);
@@ -478,44 +472,49 @@
 
     .header-actions {
         display: flex;
-        gap: 10px;
+        gap: 8px;
+        flex-wrap: wrap;
     }
     .btn-action {
-        background: var(--bg-tertiary);
-        border: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--card-border);
         color: var(--text-secondary);
-        padding: 8px 16px;
-        border-radius: 6px;
+        padding: 9px 16px;
+        border-radius: 8px;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 8px;
         font-weight: 500;
-        transition: all 0.2s;
+        font-size: 0.875rem;
+        transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
     }
     .btn-action:hover {
-        background: var(--bg-secondary);
+        background: rgba(255, 255, 255, 0.06);
         color: var(--text-primary);
+        transform: translateY(-1px);
     }
 
     .btn-action.primary {
         background: var(--accent-blue-light);
         color: var(--accent-blue);
-        border-color: rgba(79, 140, 247, 0.3);
+        border-color: rgba(79, 140, 247, 0.25);
     }
     .btn-action.primary:hover {
         background: var(--accent-blue);
         color: white;
+        box-shadow: 0 4px 12px rgba(79, 140, 247, 0.25);
     }
 
     .btn-action.success {
         background: var(--accent-green-light);
         color: var(--accent-green);
-        border-color: rgba(52, 211, 153, 0.3);
+        border-color: rgba(52, 211, 153, 0.25);
     }
     .btn-action.success:hover {
         background: var(--accent-green);
         color: white;
+        box-shadow: 0 4px 12px rgba(52, 211, 153, 0.25);
     }
 
     .btn-action:disabled {
@@ -523,13 +522,14 @@
         cursor: not-allowed;
     }
     .btn-action:disabled:hover {
-        background: var(--bg-tertiary);
+        background: rgba(255, 255, 255, 0.03);
         color: var(--text-secondary);
+        transform: none;
     }
 
     .btn-action.danger {
         color: var(--accent-red);
-        border-color: rgba(248, 113, 113, 0.3);
+        border-color: rgba(248, 113, 113, 0.25);
     }
     .btn-action.danger:hover {
         background: var(--accent-red-light);
@@ -542,7 +542,7 @@
         align-items: flex-start;
     }
     .config-column {
-        flex: 0 0 320px;
+        flex: 0 0 340px;
     }
     .teams-column {
         flex: 1;
@@ -561,37 +561,60 @@
         }
     }
 
-    .info-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+    .config-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: var(--card-shadow), var(--card-highlight);
+    }
+    .config-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .config-title i {
+        color: var(--accent-blue);
+        font-size: 0.8rem;
+    }
+    .teams-section {
+        display: flex;
+        flex-direction: column;
+    }
+    .teams-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    .teams-title i {
+        color: var(--accent-blue);
+        font-size: 0.8rem;
     }
     .sticky-card {
         position: sticky;
         top: 20px;
     }
-    .card-header {
-        padding: 15px 20px;
-        border-bottom: 1px solid var(--border-color);
-        background: transparent;
-        border-radius: 8px 8px 0 0;
-    }
-    .card-header h3 {
-        margin: 0;
-        font-size: 1.1rem;
-        color: var(--text-primary);
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    .card-content {
-        padding: 20px;
-    }
 
     .settings-list {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 22px;
     }
     .setting-group {
         display: flex;
@@ -602,24 +625,25 @@
     .setting-group label {
         font-size: 0.85rem;
         color: var(--text-secondary);
-        font-weight: 600;
+        font-weight: 500;
         display: flex;
         align-items: center;
         gap: 8px;
     }
 
     .modern-input {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        padding: 10px;
-        border-radius: 6px;
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
+        padding: 10px 12px;
+        border-radius: 8px;
         color: var(--text-primary);
         width: 100%;
-        transition: border-color 0.2s;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
         box-sizing: border-box;
     }
     .modern-input:focus {
         border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
         outline: none;
     }
 
@@ -634,16 +658,21 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 12px;
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
         color: var(--text-primary);
         cursor: pointer;
         text-align: left;
         box-sizing: border-box;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .custom-select-trigger:hover {
+        border-color: var(--border-hover);
     }
     .custom-select-trigger:focus {
         border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
         outline: none;
     }
     .placeholder {
@@ -653,22 +682,21 @@
 
     .custom-dropdown-menu {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 6px);
         left: 0;
         width: 100%;
         background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
         z-index: 100;
-        box-shadow: var(--shadow-lg);
-        margin-top: 4px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
     .dropdown-search {
         width: 100%;
         border: none;
-        border-bottom: 1px solid var(--border-color);
-        background: var(--bg-tertiary);
-        padding: 10px;
+        border-bottom: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 10px 12px;
         color: var(--text-primary);
         outline: none;
         box-sizing: border-box;
@@ -676,40 +704,46 @@
     .options-list {
         max-height: 250px;
         overflow-y: auto;
+        padding: 4px;
     }
     .dropdown-option {
         width: 100%;
         text-align: left;
         background: transparent;
         border: none;
-        padding: 10px 14px;
+        padding: 9px 12px;
         color: var(--text-secondary);
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 8px;
-        transition: background 0.1s;
+        border-radius: 6px;
+        transition: background var(--transition-fast), color var(--transition-fast);
     }
     .dropdown-option:hover {
-        background: var(--bg-primary);
+        background: var(--row-hover);
         color: var(--text-primary);
     }
     .dropdown-option.danger {
         color: var(--accent-red);
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--card-border);
+        border-radius: 6px 6px 0 0;
+    }
+    .dropdown-option.danger:hover {
+        background: var(--accent-red-light);
     }
 
     .teams-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 20px;
+        gap: 24px;
         align-items: stretch;
     }
 
     .add-team-card {
-        border: 2px dashed var(--border-color);
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 8px;
+        border: 2px dashed var(--card-border);
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -718,7 +752,7 @@
         color: var(--text-muted);
         cursor: pointer;
         min-height: 250px;
-        transition: all 0.2s;
+        transition: border-color var(--transition-base), color var(--transition-base), background var(--transition-base);
     }
 
     .add-team-card:hover {
@@ -728,15 +762,15 @@
     }
 
     .add-icon-circle {
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
-        background: var(--bg-tertiary);
+        background: rgba(255, 255, 255, 0.04);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        transition: transform 0.2s;
+        transition: transform var(--transition-base), background var(--transition-base);
     }
 
     .add-team-card:hover .add-icon-circle {

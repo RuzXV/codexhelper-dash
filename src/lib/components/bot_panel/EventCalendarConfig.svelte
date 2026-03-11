@@ -281,28 +281,34 @@
     .calendar-config-container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 24px;
         padding-bottom: 80px;
+        animation: cardSlideUp var(--transition-smooth) both;
     }
 
     .section-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
         overflow: visible;
+        box-shadow: var(--card-shadow), var(--card-highlight);
     }
     .section-header {
-        padding: 15px 20px;
-        background: transparent;
-        border-bottom: 1px solid var(--border-color);
+        padding: 18px 24px;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 12px 12px 0 0;
     }
     .section-header h3 {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         color: var(--text-primary);
         display: flex;
         align-items: center;
         gap: 10px;
+        font-weight: 600;
     }
     .section-desc {
         margin: 5px 0 0 0;
@@ -310,10 +316,10 @@
         color: var(--text-secondary);
     }
     .settings-body {
-        padding: 20px;
+        padding: 24px;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 22px;
     }
     .setting-group {
         display: flex;
@@ -321,7 +327,7 @@
         gap: 8px;
     }
     .setting-group label {
-        font-weight: 600;
+        font-weight: 500;
         color: var(--text-primary);
         font-size: 0.95rem;
     }
@@ -346,22 +352,27 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 16px;
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
         border-radius: 8px;
         color: var(--text-primary);
         cursor: pointer;
         font-size: 0.95rem;
-        transition: all 0.2s;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
     }
     .custom-select-trigger:hover,
     .custom-select-trigger.active {
         border-color: var(--accent-blue);
     }
+    .custom-select-trigger:focus {
+        border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
+        outline: none;
+    }
     .arrow {
         font-size: 0.8rem;
         opacity: 0.7;
-        transition: transform 0.2s;
+        transition: transform var(--transition-base);
     }
     .active .arrow {
         transform: rotate(180deg);
@@ -373,17 +384,18 @@
 
     .custom-dropdown-menu {
         position: absolute;
-        top: calc(100% + 5px);
+        top: calc(100% + 6px);
         left: 0;
         width: 100%;
         background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        box-shadow: var(--shadow-md);
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
         z-index: 100;
         overflow: hidden;
         max-height: 250px;
         overflow-y: auto;
+        padding: 4px;
     }
     .dropdown-option {
         width: 100%;
@@ -391,14 +403,15 @@
         background: transparent;
         border: none;
         display: block;
-        padding: 10px 16px;
+        padding: 9px 14px;
         cursor: pointer;
         color: var(--text-secondary);
-        transition: background 0.2s;
+        transition: background var(--transition-fast), color var(--transition-fast);
         font-size: 0.9rem;
+        border-radius: 6px;
     }
     .dropdown-option:hover {
-        background: var(--bg-tertiary);
+        background: var(--row-hover);
         color: var(--text-primary);
     }
     .dropdown-option.selected {
@@ -421,10 +434,10 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        background: var(--bg-tertiary);
-        padding: 15px;
-        border-radius: 6px;
-        border: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 18px;
+        border-radius: 10px;
+        border: 1px solid var(--card-border);
     }
     .toggle-wrapper {
         position: relative;
@@ -444,9 +457,9 @@
         right: 0;
         bottom: 0;
         background-color: var(--bg-primary);
-        transition: 0.4s;
+        transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         border-radius: 34px;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--card-border);
     }
     .toggle-switch:before {
         position: absolute;
@@ -456,12 +469,13 @@
         left: 3px;
         bottom: 3px;
         background-color: var(--text-secondary);
-        transition: 0.4s;
+        transition: transform 0.3s, background-color 0.3s;
         border-radius: 50%;
     }
     input:checked + .toggle-switch {
         background-color: var(--accent-blue);
         border-color: var(--accent-blue);
+        box-shadow: 0 0 12px rgba(79, 140, 247, 0.3);
     }
     input:checked + .toggle-switch:before {
         transform: translateX(var(--toggle-translate));
@@ -477,14 +491,20 @@
     }
 
     .modern-date-input {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
         color: var(--text-primary);
         padding: 12px;
         border-radius: 8px;
         width: 100%;
         font-family: inherit;
         font-size: 0.95rem;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .modern-date-input:focus {
+        border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
+        outline: none;
     }
     .modern-date-input::-webkit-calendar-picker-indicator {
         filter: invert(1);
@@ -494,13 +514,13 @@
     .personalization-options {
         margin-top: 10px;
         padding-top: 20px;
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid var(--card-border);
     }
     .info-note {
         background: var(--accent-blue-light);
         border-left: 3px solid var(--accent-blue);
-        padding: 15px;
-        border-radius: 4px;
+        padding: 16px 18px;
+        border-radius: 8px;
         color: var(--text-secondary);
         font-size: 0.9rem;
         display: flex;

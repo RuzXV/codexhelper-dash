@@ -54,13 +54,17 @@
         backdrop-filter: blur(4px);
     }
     .modal-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-lg);
-        padding: 28px;
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 32px;
         max-width: 400px;
         width: 90%;
         text-align: center;
+        box-shadow: var(--card-shadow-hover), var(--card-highlight);
+        animation: cardSlideUp var(--transition-smooth) both;
     }
     .modal-icon {
         font-size: 2rem;
@@ -90,26 +94,30 @@
         justify-content: center;
     }
     .btn-cancel {
-        background: var(--bg-tertiary);
+        background: rgba(255, 255, 255, 0.03);
         color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        padding: 8px 20px;
-        border-radius: 8px;
+        border: 1px solid var(--card-border);
+        padding: 9px 22px;
+        border-radius: 10px;
         font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
     }
     .btn-cancel:hover {
         color: var(--text-primary);
-        border-color: var(--border-hover);
+        border-color: var(--card-border-hover);
+        background: rgba(255, 255, 255, 0.05);
     }
     .btn-confirm {
-        padding: 8px 20px;
-        border-radius: 8px;
+        padding: 9px 22px;
+        border-radius: 10px;
         font-weight: 600;
         cursor: pointer;
         border: none;
-        transition: all 0.2s;
+        transition: background var(--transition-base), transform var(--transition-fast);
+    }
+    .btn-confirm:hover {
+        transform: translateY(-1px);
     }
     .btn-confirm.danger {
         background: var(--accent-red);

@@ -96,21 +96,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 8px 14px;
-        background: var(--bg-tertiary);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
+        padding: 9px 14px;
+        background: var(--bg-input, var(--bg-tertiary));
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
         color: var(--text-primary);
         cursor: pointer;
         font-size: var(--font-size-sm);
-        transition: all 0.2s ease;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
         min-height: 38px;
     }
     .custom-select-trigger:hover {
-        border-color: var(--border-hover);
+        border-color: var(--card-border-hover);
     }
     .custom-select-trigger.open {
         border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
     }
     .select-label {
         overflow: hidden;
@@ -123,7 +124,7 @@
     .chevron {
         font-size: 0.7em;
         opacity: 0.6;
-        transition: transform 0.2s ease;
+        transition: transform var(--transition-base);
         flex-shrink: 0;
     }
     .chevron.rotated {
@@ -134,22 +135,31 @@
         top: calc(100% + 4px);
         left: 0;
         right: 0;
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        box-shadow: var(--shadow-lg);
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
+        box-shadow: var(--card-shadow-hover);
         z-index: 100;
         overflow: hidden;
+        padding: 4px;
     }
     .dropdown-search {
-        width: 100%;
+        width: calc(100% - 8px);
+        margin: 0 4px 4px;
         padding: 8px 12px;
         background: var(--bg-input);
-        border: none;
-        border-bottom: 1px solid var(--border-color);
+        border: 1px solid var(--card-border);
+        border-radius: 6px;
         color: var(--text-primary);
         font-size: var(--font-size-sm);
         outline: none;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .dropdown-search:focus {
+        border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
     }
     .dropdown-options {
         max-height: 200px;
@@ -163,23 +173,21 @@
         padding: 8px 12px;
         background: transparent;
         border: none;
-        border-bottom: 1px solid var(--glass-border);
+        border-radius: 6px;
         color: var(--text-secondary);
         cursor: pointer;
         text-align: left;
         font-size: var(--font-size-sm);
-        transition: all 0.15s ease;
+        transition: background var(--transition-fast), color var(--transition-fast);
+        margin: 1px 0;
     }
     .dropdown-option:hover {
-        background: var(--bg-tertiary);
+        background: var(--row-hover);
         color: var(--text-primary);
     }
     .dropdown-option.selected {
         color: var(--accent-blue);
         background: var(--accent-blue-light);
-    }
-    .dropdown-option:last-child {
-        border-bottom: none;
     }
     .dropdown-option.empty {
         cursor: default;

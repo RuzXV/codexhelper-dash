@@ -174,26 +174,28 @@
 
 <style>
     .team-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         height: 100%;
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.2s;
+        box-shadow: var(--card-shadow), var(--card-highlight);
+        transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
     }
     .team-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-        border-color: var(--accent-blue-bright);
+        transform: translateY(-3px);
+        box-shadow: var(--card-shadow-hover), var(--card-highlight);
+        border-color: var(--card-border-hover);
     }
 
     .team-header {
-        background: transparent;
-        padding: 12px 15px;
-        border-bottom: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -207,8 +209,8 @@
     .team-badge {
         background: var(--accent-blue);
         color: white;
-        padding: 2px 8px;
-        border-radius: 4px;
+        padding: 3px 10px;
+        border-radius: 6px;
         font-size: 0.75rem;
         font-weight: 700;
     }
@@ -220,18 +222,19 @@
         font-weight: 700;
         font-size: 1rem;
         width: 100%;
-        padding: 4px;
-        border-radius: 4px;
-        transition: all 0.2s;
+        padding: 4px 6px;
+        border-radius: 6px;
+        transition: border-color var(--transition-base), background var(--transition-base);
     }
     .team-name-input:hover {
-        border-color: var(--border-color);
-        background: var(--bg-primary);
+        border-color: var(--card-border);
+        background: rgba(255, 255, 255, 0.02);
     }
     .team-name-input:focus {
         outline: none;
         border-color: var(--accent-blue);
-        background: var(--bg-primary);
+        box-shadow: var(--focus-ring);
+        background: rgba(255, 255, 255, 0.02);
     }
 
     .btn-icon.danger {
@@ -239,17 +242,20 @@
         border: none;
         color: var(--text-muted);
         cursor: pointer;
-        transition: color 0.2s;
+        padding: 6px;
+        border-radius: 6px;
+        transition: color var(--transition-fast), background var(--transition-fast);
     }
     .btn-icon.danger:hover {
         color: var(--accent-red);
+        background: var(--accent-red-light);
     }
 
     .team-body {
-        padding: 15px;
+        padding: 18px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 16px;
         flex: 1;
     }
 
@@ -269,26 +275,28 @@
     .field label {
         font-size: 0.75rem;
         color: var(--text-secondary);
-        font-weight: 600;
+        font-weight: 500;
         display: flex;
         gap: 5px;
         align-items: center;
     }
 
     .modern-input {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        padding: 8px;
-        border-radius: 4px;
+        background: var(--bg-input);
+        border: 1px solid var(--card-border);
+        padding: 9px 10px;
+        border-radius: 8px;
         color: var(--text-primary);
         font-size: 0.85rem;
         width: 100%;
+        transition: border-color var(--transition-base), box-shadow var(--transition-base);
     }
     .modern-input.center-text {
         text-align: center;
     }
     .modern-input:focus {
         border-color: var(--accent-blue);
+        box-shadow: var(--focus-ring);
         outline: none;
     }
 
@@ -304,8 +312,8 @@
         font-size: 0.8rem;
         color: var(--text-secondary);
         background: var(--accent-blue-light);
-        padding: 6px 10px;
-        border-radius: 4px;
+        padding: 8px 12px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -316,18 +324,18 @@
     }
 
     .signup-container {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         flex: 1;
     }
     .list-header {
-        padding: 8px 12px;
+        padding: 10px 14px;
         background: transparent;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         font-size: 0.8rem;
         font-weight: 600;
         color: var(--text-secondary);
@@ -337,8 +345,8 @@
     }
 
     .count-badge {
-        background: var(--bg-tertiary);
-        padding: 2px 6px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2px 8px;
         border-radius: 10px;
         font-size: 0.7rem;
     }
@@ -349,24 +357,21 @@
 
     .signup-list {
         list-style: none;
-        padding: 0;
+        padding: 2px;
         margin: 0;
         flex: 1;
     }
     .signup-list li {
-        padding: 0px 12px;
-        border-bottom: 1px solid var(--border-color);
+        padding: 1px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 0.9rem;
-        transition: background 0.1s;
+        border-radius: 6px;
+        transition: background var(--transition-fast);
     }
     .signup-list li:hover {
-        background: var(--bg-tertiary);
-    }
-    .signup-list li:last-child {
-        border-bottom: none;
+        background: var(--row-hover);
     }
     .empty-list {
         font-style: italic;
@@ -381,8 +386,9 @@
         color: var(--text-muted);
         cursor: pointer;
         font-size: 0.8rem;
-        padding: 2px 4px;
-        border-radius: 4px;
+        padding: 4px 6px;
+        border-radius: 6px;
+        transition: color var(--transition-fast), background var(--transition-fast);
     }
     .btn-remove:hover {
         color: var(--accent-red);
@@ -391,14 +397,14 @@
 
     .add-signup-row {
         display: flex;
-        border-top: 1px solid var(--border-color);
-        background: rgba(0, 0, 0, 0.05);
+        border-top: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.02);
     }
     .add-signup-row input {
         flex: 1;
         background: transparent;
         border: none;
-        padding: 10px 12px;
+        padding: 11px 14px;
         color: var(--text-primary);
         font-size: 0.85rem;
         outline: none;
@@ -406,11 +412,11 @@
     .add-signup-row button {
         background: transparent;
         border: none;
-        border-left: 1px solid var(--border-color);
-        width: 40px;
+        border-left: 1px solid var(--card-border);
+        width: 42px;
         color: var(--accent-blue);
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background var(--transition-fast);
     }
     .add-signup-row button:hover {
         background: var(--accent-blue-light);

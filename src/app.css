@@ -95,6 +95,23 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.2);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
 
+    /* Card system — modern glass-like panels */
+    --card-bg: rgba(22, 34, 49, 0.65);
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-border-hover: rgba(255, 255, 255, 0.12);
+    --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.25);
+    --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    /* Focus & interaction */
+    --focus-ring: 0 0 0 3px rgba(79, 140, 247, 0.2);
+    --row-hover: rgba(79, 140, 247, 0.04);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
     /* Toggle (standardized) */
     --toggle-width: 44px;
     --toggle-height: 24px;
@@ -163,4 +180,17 @@ a:hover {
 /* Common form styles */
 input, select, textarea {
     font-family: inherit;
+}
+
+/* Global focus styles for form elements */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: var(--focus-ring);
+}
+
+/* Card entrance animation */
+@keyframes cardSlideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
