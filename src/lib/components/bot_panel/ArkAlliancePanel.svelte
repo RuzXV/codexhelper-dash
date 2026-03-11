@@ -646,7 +646,8 @@
     }
     .duration-field .modern-input::-webkit-inner-spin-button,
     .duration-field .modern-input::-webkit-outer-spin-button {
-        opacity: 1;
+        -webkit-appearance: none;
+        margin: 0;
     }
     .duration-label {
         font-size: 0.8rem;
