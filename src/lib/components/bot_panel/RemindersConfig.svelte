@@ -35,6 +35,26 @@
         }
     }
 
+    function buildPlaceholderReminders(loadedReminders = []) {
+        const types = ['ruins', 'altar'];
+        return types.map((type) => {
+            const existing = loadedReminders.find((r) => r.reminder_type === type);
+            if (existing) return existing;
+            return {
+                reminder_type: type,
+                channel_id: null,
+                is_active: false,
+                create_discord_event: false,
+                role_id: null,
+                role_menu_message_id: null,
+                first_instance_ts: 0,
+                last_instance_ts: 0,
+                reminder_intervals_seconds: '14400',
+                _placeholder: true,
+            };
+        });
+    }
+
     async function loadData() {
         loading = true;
         try {
@@ -43,26 +63,10 @@
             const loadedReminders = (res.reminders || []).map((r) => ({
                 ...r,
                 is_active: !!r.is_active,
-                create_discord_event: !!r.create_discord_events,
+                create_discord_event: !!r.create_discord_event,
             }));
 
-            const types = ['ruins', 'altar'];
-            reminders = types.map((type) => {
-                const existing = loadedReminders.find((r) => r.reminder_type === type);
-                if (existing) return existing;
-                return {
-                    reminder_type: type,
-                    channel_id: null,
-                    is_active: false,
-                    create_discord_event: false,
-                    role_id: null,
-                    role_menu_message_id: null,
-                    first_instance_ts: 0,
-                    last_instance_ts: 0,
-                    reminder_intervals_seconds: '14400',
-                    _placeholder: true,
-                };
-            });
+            reminders = buildPlaceholderReminders(loadedReminders);
 
             customReminders = (res.customReminders || []).map((c) => {
                 let unit = 'h';
@@ -81,7 +85,9 @@
             deletedCustomIds = [];
             originalState = JSON.stringify({ r: reminders, c: customReminders, d: deletedCustomIds });
         } catch (e) {
-            console.error('Failed to load data:', e);
+            console.error('Failed to load reminder data:', e);
+            // Always show ruins/altar cards even if API fails
+            reminders = buildPlaceholderReminders();
         } finally {
             loading = false;
         }
