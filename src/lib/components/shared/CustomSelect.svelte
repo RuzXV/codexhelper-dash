@@ -140,7 +140,7 @@
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid var(--card-border);
         border-radius: 10px;
-        box-shadow: var(--card-shadow-hover);
+        box-shadow: none;
         z-index: 100;
         overflow: hidden;
         padding: 4px;

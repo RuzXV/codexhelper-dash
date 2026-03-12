@@ -68,6 +68,23 @@ export async function logout(): Promise<void> {
  * Returns the user if authenticated, null otherwise.
  */
 export async function init(): Promise<AuthUser | null> {
+    // Dev bypass mode — skip Discord login entirely
+    if (import.meta.env.VITE_DEV_BYPASS === 'true') {
+        const devUser: AuthUser = {
+            id: '285201373266575361',
+            username: 'DevBypass',
+            discriminator: '0',
+            avatar: null,
+            global_name: 'Dev Bypass',
+            display_name: 'Dev Bypass',
+            is_active_patron: true,
+            is_master_admin: true,
+        };
+        currentUser = devUser;
+        document.dispatchEvent(new CustomEvent('auth:loggedIn', { detail: { user: devUser } }));
+        return devUser;
+    }
+
     // Check cache for instant display
     const cached = getCachedUser();
     if (cached) {

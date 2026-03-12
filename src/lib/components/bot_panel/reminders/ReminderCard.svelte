@@ -97,6 +97,29 @@
         dispatch('change');
     }
 
+    function hasInterval(seconds) {
+        if (!reminder.reminder_intervals_seconds) return false;
+        return reminder.reminder_intervals_seconds.split(',').map(Number).includes(seconds);
+    }
+
+    function toggleInterval(seconds) {
+        let intervals = reminder.reminder_intervals_seconds
+            ? reminder.reminder_intervals_seconds.split(',').map(Number)
+            : [];
+
+        if (intervals.includes(seconds)) {
+            intervals = intervals.filter((s) => s !== seconds);
+        } else {
+            intervals.push(seconds);
+        }
+
+        // Ensure at least one interval is selected
+        if (intervals.length === 0) intervals = [14400];
+
+        reminder.reminder_intervals_seconds = intervals.sort((a, b) => a - b).join(',');
+        dispatch('change');
+    }
+
     function handleShiftTime(minutes) {
         dispatch('shiftTime', { item: reminder, minutes });
     }
@@ -197,10 +220,22 @@
                             </div>
                         </div>
 
-                        <div class="sub-setting-row" style="margin-top: 10px;">
-                            <div class="text-info">
-                                <span class="sub-label">Reminder Intervals</span>
-                                <p class="sub-text">{getReminderIntervals(reminder)} before each event</p>
+                        <div class="setting-group" style="margin-top: 10px;">
+                            <label>Reminder Intervals</label>
+                            <p class="sub-text" style="margin-bottom: 8px;">How far in advance to send reminders:</p>
+                            <div class="interval-checkboxes">
+                                <label class="interval-checkbox">
+                                    <input type="checkbox" checked={hasInterval(3600)} on:change={() => toggleInterval(3600)} />
+                                    1 hour before
+                                </label>
+                                <label class="interval-checkbox">
+                                    <input type="checkbox" checked={hasInterval(14400)} on:change={() => toggleInterval(14400)} />
+                                    4 hours before
+                                </label>
+                                <label class="interval-checkbox">
+                                    <input type="checkbox" checked={hasInterval(28800)} on:change={() => toggleInterval(28800)} />
+                                    8 hours before
+                                </label>
                             </div>
                         </div>
 

@@ -388,7 +388,7 @@
         background: var(--bg-card);
         border: 1px solid var(--card-border);
         border-radius: 10px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        box-shadow: none;
         z-index: 100;
         overflow: hidden;
         max-height: 250px;
