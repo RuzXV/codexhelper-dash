@@ -71,6 +71,7 @@
                         selectedServer={$selectedServer}
                         {guildChannels}
                         channelSettings={currentSettings}
+                        on:navigateTab
                     />
                 {:else if activeTab === 'channels'}
                     <ChannelConfig

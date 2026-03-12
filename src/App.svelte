@@ -218,7 +218,7 @@
             {#key currentView}
                 <div class="panel-wrapper" in:fade={{ duration: 150 }}>
                     {#if currentView === 'config'}
-                        <BotConfigPanel {user} activeTab={currentBotTab} />
+                        <BotConfigPanel {user} activeTab={currentBotTab} on:navigateTab={e => handleNavigate({ detail: { view: 'config', tab: e.detail.tab } })} />
                     {:else if currentView === 'master'}
                         <MasterPanel {user} />
                     {:else if currentView === 'changelog'}

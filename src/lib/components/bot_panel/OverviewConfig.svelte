@@ -71,6 +71,21 @@
         return `https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator || 0) % 5}.png`;
     }
 
+    const TAB_MAP = {
+        calendar: 'calendar',
+        ark: 'ark',
+        mge: 'mge',
+        ruins: 'reminders',
+        altar: 'reminders',
+    };
+
+    function navigateToFeature(featureKey) {
+        const tab = TAB_MAP[featureKey];
+        if (tab) {
+            dispatch('navigateTab', { tab });
+        }
+    }
+
     async function deauthorizeServer() {
         deauthorizing = true;
         try {
@@ -153,7 +168,7 @@
                     { key: 'ruins', label: 'Ruins', icon: 'fa-landmark' },
                     { key: 'altar', label: 'Altar', icon: 'fa-moon' },
                 ] as feat}
-                    <div class="feature-pill" class:active={features[feat.key]?.enabled} title={features[feat.key]?.enabled ? getChannelMention(features[feat.key].channel_id) : 'Not Configured'}>
+                    <button class="feature-pill" class:active={features[feat.key]?.enabled} title={features[feat.key]?.enabled ? getChannelMention(features[feat.key].channel_id) : 'Not Configured'} on:click={() => navigateToFeature(feat.key)}>
                         <i class="fas {feat.icon}"></i>
                         <span>{feat.label}</span>
                         {#if features[feat.key]?.enabled}
@@ -161,7 +176,7 @@
                         {:else}
                             <i class="fas fa-minus pill-status inactive"></i>
                         {/if}
-                    </div>
+                    </button>
                 {/each}
             </div>
         </div>
@@ -372,13 +387,23 @@
         border-radius: 20px;
         font-size: 0.85rem;
         color: var(--text-muted);
-        cursor: default;
-        transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base);
+        cursor: pointer;
+        transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+    }
+    .feature-pill:hover {
+        border-color: var(--accent-blue);
+        background: var(--accent-blue-light);
+        color: var(--accent-blue);
+        transform: translateY(-1px);
     }
     .feature-pill.active {
         background: var(--accent-green-light);
         border-color: rgba(34, 197, 94, 0.2);
         color: var(--accent-green);
+    }
+    .feature-pill.active:hover {
+        border-color: var(--accent-green);
+        transform: translateY(-1px);
     }
     .feature-pill i:first-child {
         font-size: 0.75rem;
